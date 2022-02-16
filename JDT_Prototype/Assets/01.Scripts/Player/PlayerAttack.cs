@@ -57,7 +57,7 @@ public class PlayerAttack : Player_Action
     {
         CameraAction.ShakeCam(10, 0.1f);
         GameManager.PlaySFX(GameManager.Instance.audioBox.p_shot_gun, 0.6f);
-        TextureParticleManager.Instance.SpawnShell(transform.position, GetEjectDirection());
+        //TextureParticleManager.Instance.SpawnShell(transform.position, GetEjectDirection());
 
         float beforeAngle = gun.transform.rotation.eulerAngles.z - (shootAngle / 2);
 

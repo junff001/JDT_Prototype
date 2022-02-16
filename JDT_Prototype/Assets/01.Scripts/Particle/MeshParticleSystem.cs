@@ -6,7 +6,6 @@ using Random = UnityEngine.Random;
 
 public class MeshParticleSystem : MonoBehaviour
 {
-
     private const int MAX_QUAD_AMOUNT = 15000;
     //에디터에서 스프라이트에 있는 픽셀 좌표값을 조정하도록 
     [Serializable]

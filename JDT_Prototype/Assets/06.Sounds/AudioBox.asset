@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7710b2e70338cbb41aeca91ed85c1cec, type: 3}
+  m_Name: AudioBox
+  m_EditorClassIdentifier: 
+  p_shot_gun: {fileID: 8300000, guid: 6ca2050066418c249b4347cc39f843d7, type: 3}
+  p_shot_gun_reload: {fileID: 8300000, guid: 6463db63f60bf5f40bd509503263a39b, type: 3}
