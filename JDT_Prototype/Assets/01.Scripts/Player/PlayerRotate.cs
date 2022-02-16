@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class PlayerRotate : Player_Action // �������� �˾Ƽ� ��������
+public class PlayerRotate : PlayerAction // �������� �˾Ƽ� ��������
 {
     [HideInInspector]public float playerAngle = 0f;
     [HideInInspector]public float gunAngle = 0f;
@@ -25,7 +25,7 @@ public class PlayerRotate : Player_Action // �������� �˾Ƽ�
 
     protected override void Update()
     {
-        if (PlayerMove.isDead) return;
+        //if (PlayerMove.isDead) return;
 
         CrosshairMove();
         Rotate();

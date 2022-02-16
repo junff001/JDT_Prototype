@@ -30,8 +30,8 @@ public class Armor_UI : MonoBehaviour
 
         //Init_Armor(); // 방어구 UI 초기화
 
-        EventManager.AddEvent("ADD_ARMOR", Add_Armor);
-        EventManager.AddEvent("DESTROY_ARMOR", Destroy_Armor);
+        //EventManager.AddEvent("ADD_ARMOR", Add_Armor);
+        //EventManager.AddEvent("DESTROY_ARMOR", Destroy_Armor);
     }
 
     void Add_Armor(GameObject armor) // 방어구 흭득

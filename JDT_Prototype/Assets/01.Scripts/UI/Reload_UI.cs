@@ -15,9 +15,9 @@ public class Reload_UI : MonoBehaviour
     void Start()
     {
         Image_Enabled(false);
-        fill_Duration = GameObject.Find("player").GetComponent<PlayerAttack>().reloadTime;
-        EventManager.AddEvent("FILL_AMOUNT", Fill_Amount);
-        EventManager.AddEvent("STOP_RELOAD", StopReload);
+        //fill_Duration = GameObject.Find("player").GetComponent<PlayerAttack>().reloadTime;
+        //EventManager.AddEvent("FILL_AMOUNT", Fill_Amount);
+        //EventManager.AddEvent("STOP_RELOAD", StopReload);
         
     }
 
@@ -28,7 +28,7 @@ public class Reload_UI : MonoBehaviour
         {
             Image_Enabled(false);
             fill_Bar.transform.localScale = new Vector3(0, 1, 1);
-            EventManager.TriggerEvent("LOAD_BULLET"); // ÃÑ¾Ë ÀåÀü UI
+            //EventManager.TriggerEvent("LOAD_BULLET"); // ï¿½Ñ¾ï¿½ ï¿½ï¿½ï¿½ï¿½ UI
         });
     }
 

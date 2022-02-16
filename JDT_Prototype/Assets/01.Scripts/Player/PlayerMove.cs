@@ -1,77 +1,58 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-
-public class PlayerMove : Player_Action
+public class PlayerMove : PlayerAction
 {
-    public float dashPlayTime;
-    public float dashDelayTime;
-    public float reboundingTime;
-
-    public float dashDistance = 5f;
-
-    private float moveX;
-    private float moveY;
-
-    public static bool isDead = false;
-    public static bool isDashing = false;
-    private bool isRebounding = false;
-    private bool canDash = true;
-
     [SerializeField] private float speed;
+    [SerializeField] private float dashDistance = 5f;
+    [SerializeField] private float dashDelayTime;
 
-    WaitForSeconds ws_dashPlay;
-    WaitForSeconds ws_dashDelay;
-
-    PlayerAttack pa;
-
-    protected override void Start() 
+    protected override void Start()
     {
         base.Start();
-        ws_dashPlay = new WaitForSeconds(dashPlayTime);
-        ws_dashDelay = new WaitForSeconds(dashDelayTime);
-        pa = GetComponent<PlayerAttack>();
+
+        EventManager.AddEvent_Action("MOVE", Move);
+        EventManager.AddEvent_Action("DASH", Dash);
     }
 
-    protected override void Update()
+    void Move(float horizontal, float vertical)
     {
-        if (isDead) return;
+        rigid.velocity = new Vector2(horizontal * speed, vertical * speed);
+    }
 
-        Move();
-        if (Input.GetMouseButtonDown(1))
+    void Dash()
+    {
+        if (rigid.velocity.sqrMagnitude > 0.1f)
         {
-            if (isDashing || !canDash) return;
-            StartCoroutine(Dash());
+            Vector2 dashAfterPos;
+            dashAfterPos = rigid.position + rigid.velocity.normalized * dashDistance;
+            rigid.velocity = rigid.velocity.normalized * dashDistance;
+
+            EventManager.TriggerEvent_Action("RELOAD");
+
+            if (rigid.position == dashAfterPos)
+            {
+                AfterImageManager.isOnAfterEffect = false;
+            }
+
+            if (!AfterImageManager.isOnAfterEffect)
+            {
+                AfterImageManager.isOnAfterEffect = true;
+            }
+
+            StartCoroutine(Dash_Delay());
         }
     }
 
-    void Move()
+    IEnumerator Dash_Delay()
     {
-        if (isDashing || isRebounding) return;
-
-        moveX = Input.GetAxisRaw("Horizontal");
-        moveY = Input.GetAxisRaw("Vertical");
-        rigid.velocity = new Vector3(moveX * speed, moveY * speed, 0);
+        yield return new WaitForSeconds(dashDelayTime);
     }
 
-    IEnumerator Dash()
+    void OnDestroy()
     {
-        if (rigid.velocity.sqrMagnitude < 0.1f) yield break;
-
-        EventManager.TriggerEvent("STOP_RELOAD");
-        pa.DashReload();
-        rigid.velocity = rigid.velocity.normalized * dashDistance;
-
-        isDashing = true;
-        AfterImageManager.isOnAfterEffect = true;
-        canDash = false;
-        GameManager.Instance.OnReload.Invoke();
-        yield return ws_dashPlay;
-        AfterImageManager.isOnAfterEffect = false;
-        isDashing = false;
-        yield return ws_dashDelay;
-        canDash = true;
+        EventManager.RemoveEvent("MOVE");
+        EventManager.RemoveEvent("DASH");
     }
 }

@@ -2,33 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Character
 {
-    public Rigidbody2D rigid { get; private set; }
+    public override Rigidbody2D rigid { get; set; }
+    public override BoxCollider2D collider { get; set; }
 
-    void Awake()
+    protected override void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
+        collider = GetComponent<BoxCollider2D>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected override void Start()
     {
-        if (collision.CompareTag("Bullet"))
-        {
-            EnemyBullet bullet = collision.GetComponent<EnemyBullet>();
-
-            if (bullet != null)
-            {
-                if (!PlayerMove.isDashing)
-                {
-                    gameObject.SetActive(false);
-
-                    PlayerMove.isDead = true;
-                    EventManager.TriggerEvent("GAME_OVER");
-                }
-            }
-        }
+       
     }
 
-
+    protected override void Update()
+    {
+        
+    }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Action : MonoBehaviour
+public class PlayerAction : MonoBehaviour
 {
     private Player player; 
 

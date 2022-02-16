@@ -14,7 +14,7 @@ public class GameOver_UI : MonoBehaviour
 
     void Start()
     {
-        EventManager.AddEvent("GAME_OVER", Gameover);
+        EventManager.AddEvent_Action("GAME_OVER", Gameover);
     }
 
     void Gameover()

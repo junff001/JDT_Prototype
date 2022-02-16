@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.F5))
         {
             PoolManager.ResetPool();
-            PlayerMove.isDead = false;
+            //PlayerMove.isDead = false;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }

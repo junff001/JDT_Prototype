@@ -15,8 +15,8 @@ public class Magazine_UI : MonoBehaviour
     {
         Init_Bullet();
 
-        EventManager.AddEvent("CONSUMPTION_BULLET", Consumption_Bullet);
-        EventManager.AddEvent("LOAD_BULLET", Load_Bullet);
+        //EventManager.AddEvent("CONSUMPTION_BULLET", Consumption_Bullet);
+        //EventManager.AddEvent("LOAD_BULLET", Load_Bullet);
     }
 
     void Init_Bullet()
