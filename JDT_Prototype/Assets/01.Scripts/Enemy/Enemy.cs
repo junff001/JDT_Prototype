@@ -4,7 +4,7 @@ using UnityEngine;
 using Pathfinding;
 using MonsterLove.StateMachine;
 
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
     public enum States {Chase, Attack }
 
@@ -91,9 +91,8 @@ public class Enemy : MonoBehaviour
         while (!TargetInAttackDistance())
         {
             Debug.Log("추격");
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.5f);
         }
-
         StateEnter(States.Attack);
     }
 
@@ -103,12 +102,14 @@ public class Enemy : MonoBehaviour
 
         while (TargetInAttackDistance())
         {
-            //공격
+            Attack();
             Debug.Log("공격");
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.5f);
         }
         StateEnter(States.Chase);
     }
+
+    public abstract void Attack();
 
     private void SightCheck()
     {

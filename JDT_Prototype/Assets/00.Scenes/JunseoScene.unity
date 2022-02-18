@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5feda8f6ad42a574e98ef9426d388bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 7277290418682155702, guid: f4eb756558c00b842a167a1e73991ee4, type: 3}
+  bullet: {fileID: 7277290418682155702, guid: 2b4a36f7d75c5f641aecdcdc24264e14, type: 3}
 --- !u!114 &1940728549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,9 +233,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf048bf041cece4b820395ee7bbf0e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  dashDistance: 5
-  dashDelayTime: 0
+  speed: 5
+  dashDistance: 15
+  dashDelayTime: 0.5
 --- !u!114 &1940728550
 MonoBehaviour:
   m_ObjectHideFlags: 0

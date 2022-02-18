@@ -35,7 +35,7 @@ public class PlayerMove : PlayerAction
 
             //Vector2 dashAfterPos = rigid.velocity.normalized * dashDistance;
 
-            rigid.velocity = rigid.velocity.normalized * speed * dashDistance;
+            rigid.velocity = rigid.velocity.normalized * dashDistance;
 
             //this.speed = 0;
 
