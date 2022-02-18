@@ -8,6 +8,8 @@ public class PlayerMove : PlayerAction
     [SerializeField] private float dashDistance = 5f;
     [SerializeField] private float dashDelayTime;
 
+    private bool isDash = false;
+
     protected override void Start()
     {
         base.Start();
@@ -18,28 +20,37 @@ public class PlayerMove : PlayerAction
 
     void Move(float horizontal, float vertical)
     {
-        rigid.velocity = new Vector2(horizontal * speed, vertical * speed);
+        if (!isDash)
+        {
+            rigid.velocity = new Vector2(horizontal * speed, vertical * speed);
+        }   
     }
 
     void Dash()
     {
         if (rigid.velocity.sqrMagnitude > 0.1f)
         {
-            Vector2 dashAfterPos;
-            dashAfterPos = rigid.position + rigid.velocity.normalized * dashDistance;
-            rigid.velocity = rigid.velocity.normalized * dashDistance;
+            isDash = true;
+            //float speed = this.speed;
 
-            EventManager.TriggerEvent_Action("RELOAD");
+            //Vector2 dashAfterPos = rigid.velocity.normalized * dashDistance;
 
-            if (rigid.position == dashAfterPos)
-            {
-                AfterImageManager.isOnAfterEffect = false;
-            }
+            rigid.velocity = rigid.velocity.normalized * speed * dashDistance;
 
-            if (!AfterImageManager.isOnAfterEffect)
-            {
-                AfterImageManager.isOnAfterEffect = true;
-            }
+            //this.speed = 0;
+
+            //EventManager.TriggerEvent_Action("RELOAD");
+
+            //if (rigid.position.x >= dashAfterPos.x || rigid.position.y >= dashAfterPos.y)
+            //{
+            //    this.speed = speed;
+            //    //AfterImageManager.isOnAfterEffect = false;
+            //}
+
+            //if (!AfterImageManager.isOnAfterEffect)
+            //{
+            //    AfterImageManager.isOnAfterEffect = true;
+            //}
 
             StartCoroutine(Dash_Delay());
         }
@@ -48,6 +59,7 @@ public class PlayerMove : PlayerAction
     IEnumerator Dash_Delay()
     {
         yield return new WaitForSeconds(dashDelayTime);
+        isDash = false;
     }
 
     void OnDestroy()
