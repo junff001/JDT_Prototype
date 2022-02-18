@@ -6,9 +6,9 @@ public class PlayerMove : PlayerAction
 {
     [SerializeField] private float speed;
     [SerializeField] private float dashDistance = 5f;
-    [SerializeField] private float dashDelayTime;
+    [SerializeField] private float dashPlayTime;
 
-    private bool isDash = false;
+    private bool isDash;
 
     protected override void Start()
     {
@@ -23,6 +23,8 @@ public class PlayerMove : PlayerAction
         if (!isDash)
         {
             rigid.velocity = new Vector2(horizontal * speed, vertical * speed);
+            animator.SetFloat("Horizontal speed", horizontal);
+            animator.SetFloat("Vertical speed", vertical);
         }   
     }
 
@@ -31,34 +33,18 @@ public class PlayerMove : PlayerAction
         if (rigid.velocity.sqrMagnitude > 0.1f)
         {
             isDash = true;
-            //float speed = this.speed;
-
-            //Vector2 dashAfterPos = rigid.velocity.normalized * dashDistance;
-
             rigid.velocity = rigid.velocity.normalized * dashDistance;
+            EventManager.TriggerEvent_Action("RELOAD");
+            AfterImageManager.isOnAfterEffect = true;
 
-            //this.speed = 0;
-
-            //EventManager.TriggerEvent_Action("RELOAD");
-
-            //if (rigid.position.x >= dashAfterPos.x || rigid.position.y >= dashAfterPos.y)
-            //{
-            //    this.speed = speed;
-            //    //AfterImageManager.isOnAfterEffect = false;
-            //}
-
-            //if (!AfterImageManager.isOnAfterEffect)
-            //{
-            //    AfterImageManager.isOnAfterEffect = true;
-            //}
-
-            StartCoroutine(Dash_Delay());
+            StartCoroutine(DashEnd());
         }
     }
 
-    IEnumerator Dash_Delay()
+    IEnumerator DashEnd()
     {
-        yield return new WaitForSeconds(dashDelayTime);
+        yield return new WaitForSeconds(dashPlayTime); // 0.5초 뒤에 대쉬가 끝남
+        AfterImageManager.isOnAfterEffect = false;
         isDash = false;
     }
 

@@ -8,6 +8,8 @@ public class PlayerAction : MonoBehaviour
     private Player player; 
 
     protected Rigidbody2D rigid { get => player?.rigid; }
+    protected BoxCollider2D collider { get => player?.collider; }
+    protected Animator animator { get => player?.animator; }
 
     public event Action<Quaternion> SetRotation;
 
