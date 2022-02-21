@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ShootAttacker : Enemy
 {
-    [SerializeField] private EnemyBullet bulletPrefab;
     Quaternion rot;
     private float angle;
     [SerializeField] private Transform firePoint;
@@ -18,6 +17,7 @@ public class ShootAttacker : Enemy
 
     public override void Attack()
     {
+        Debug.Log("원거리 공격");
         EnemyBullet bullet = PoolManager.GetItem<EnemyBullet>();
         bullet.transform.position = firePoint.transform.position;
 

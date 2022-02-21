@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
+        PoolManager.CreatePool<EnemyBullet>(enemyBullet, transform, 100);
     }
     #endregion
 
@@ -38,11 +39,6 @@ public class GameManager : MonoBehaviour
     public AudioSource sfxSource;
 
     public GameObject enemyBullet;
-
-    private void Start()
-    {
-        PoolManager.CreatePool<EnemyBullet>(enemyBullet, transform, 100);
-    }
 
     public static void PlaySound(AudioSource source, AudioClip clip, float volume = 1f)
     {

@@ -103,7 +103,7 @@ public abstract class Enemy : MonoBehaviour
         while (TargetInAttackDistance())
         {
             Attack();
-            Debug.Log("공격");
+            
             yield return new WaitForSeconds(0.5f);
         }
         StateEnter(States.Chase);
