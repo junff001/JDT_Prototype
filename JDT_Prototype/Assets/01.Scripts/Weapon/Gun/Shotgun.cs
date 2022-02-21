@@ -8,10 +8,10 @@ public class Shotgun : Gun
 
     void Start()
     {
-        EventManager.AddEvent_Action("SHOTGUN_SHOOT", Shoot);
-        EventManager.AddEvent_Action("SHOTGUN_RELOAD", Reload);
-        EventManager.AddEvent_Function("SHOTGUN_BULLETCOUNT", BulletCount);
-        EventManager.AddEvent_Function("SHOTGUN_RELOADTIME", ReloadTime);
+        EventManager.AddEvent_Action("SHOOT", Shoot);
+        EventManager.AddEvent_Action("RELOAD", Reload);
+        EventManager.AddEvent_Function("BULLETCOUNT", BulletCount);
+        EventManager.AddEvent_Function("RELOADTIME", ReloadTime);
     }
 
     protected override void Shoot()
@@ -37,23 +37,7 @@ public class Shotgun : Gun
         }
     }
 
-    protected override void Reload()
-    {
-        if (gunData.bulletCount < gunData.maxBulletCount)
-        {
-            GameManager.PlaySFX(GameManager.Instance.audioBox.p_shot_gun_reload); // 사운드
 
-            EventManager.TriggerEvent_Tween("FILLAMOUNTRELOAD_UI").onComplete += () =>
-            {
-                EventManager.TriggerEvent_Action("ONRELOADIMAGE_UI", false); // 재장전 바 On/Off
-                EventManager.TriggerEvent_Action("FILLRELOADUIRESET"); // 재장전 바 리셋 
-                EventManager.TriggerEvent_Action("LOAD_BULLET"); // 재장전 UI
-
-                AfterImageManager.isOnAfterEffect = false;
-                gunData.bulletCount = gunData.maxBulletCount;
-            };
-        }
-    }
 
     void OnDestroy()
     {
