@@ -55,7 +55,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Ground"))
+        if(collision.CompareTag("Wall"))
         {
             StartCoroutine(BulletDestroy(0f));
             StartCoroutine(ParticleDestroy(0.5f));

@@ -5,46 +5,67 @@ using System;
 
 public class Magazine_UI : MonoBehaviour
 {
-    [SerializeField] private Transform bullet_Group;
     [SerializeField] private GameObject bulletPrefab_UI;
+    [SerializeField] private Transform bulletGroup_UI;
 
-    public GameObject first_Bullet;
-    public GameObject second_Bullet;
+    private int currnetMagazine;
+
+    private List<GameObject> magazine = new List<GameObject>();
 
     void Start()
     {
-        Init_Bullet();
+        currnetMagazine = magazine.Count;
+        InitBullet_UI(); 
+        OnImageBullet_UI(true);
 
-        //EventManager.AddEvent("CONSUMPTION_BULLET", Consumption_Bullet);
-        //EventManager.AddEvent("LOAD_BULLET", Load_Bullet);
+        EventManager.AddEvent_Action("CONSUMPTIONBULLET_UI", ConsumptionBullet_UI);
+        EventManager.AddEvent_Action("RELOADBULLET_UI", ReloadBullet_UI);
     }
 
-    void Init_Bullet()
+    void InitBullet_UI()
     {
-        first_Bullet = Instantiate(bulletPrefab_UI, bullet_Group);
-        second_Bullet = Instantiate(bulletPrefab_UI, bullet_Group);
-    }
-
-   public void Load_Bullet() // 총알 장전
-    {
-        Debug.Log("?");
-        first_Bullet.SetActive(true);
-        second_Bullet.SetActive(true);
-    }
-
-    void Consumption_Bullet() // 총알 소비
-    {
-        if (first_Bullet.activeSelf)
+        for (int i = 0; i < EventManager.TriggerEvent_Int("BULLETCOUNT"); i++)
         {
-            first_Bullet.SetActive(false);
-        } 
-        else if (second_Bullet.activeSelf)
-        {
-            second_Bullet.SetActive(false);
+            magazine.Add(Instantiate(bulletPrefab_UI, bulletGroup_UI));
         }
-        else
+    }
+
+    void ReloadBullet_UI() // 총알 장전
+    {
+        OnImageBullet_UI(true);
+    }
+
+    void ConsumptionBullet_UI() // 총알 소비
+    {
+        if (EventManager.TriggerEvent_Int("BULLETCOUNT") > 0)
         {
-            Debug.Log("남은 탄 없음");
+            magazine[currnetMagazine].gameObject.SetActive(false);
+            currnetMagazine--;
+            if (currnetMagazine < 0)
+            {
+                currnetMagazine = magazine.Count;
+            }
         }
+    }
+
+    void OnImageBullet_UI(bool isOn) // On/Off
+    {
+        for (int i = 0; i < magazine.Count; i++)
+        {
+            magazine[i].gameObject.SetActive(isOn);
+        }
+    }
+
+    void OnDisable()
+    {
+        EventManager.RemoveEvent("CONSUMPTION_BULLET");
+        EventManager.RemoveEvent("LOAD_BULLET");
+    }
+
+    void OnDestroy()
+    {
+        EventManager.RemoveEvent("CONSUMPTION_BULLET");
+        EventManager.RemoveEvent("LOAD_BULLET");
     }
 }
+
