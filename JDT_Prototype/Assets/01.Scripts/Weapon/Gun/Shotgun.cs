@@ -23,9 +23,9 @@ public class Shotgun : Gun
     {
         if (bulletCount > 0)
         {
-            CameraAction.ShakeCam(10, 0.1f); // 카메라 흔들림 == 반동효과
-            GameManager.PlaySFX(GameManager.Instance.audioBox.p_shot_gun, 0.6f); // 사운드
-            TextureParticleManager.Instance.SpawnShell(transform.position, EventManager.TriggerEvent_Vector3("GETEJECTDIRECTION")); // 셰이더 그래프
+            //CameraAction.ShakeCam(10, 0.1f); // 카메라 흔들림 == 반동효과
+            //GameManager.PlaySFX(GameManager.Instance.audioBox.p_shot_gun, 0.6f); // 사운드
+            //TextureParticleManager.Instance.SpawnShell(transform.position, EventManager.TriggerEvent_Vector3("GETEJECTDIRECTION")); // 셰이더 그래프
 
             float beforeAngle = transform.rotation.eulerAngles.z - (shootAngle / 2);
 
