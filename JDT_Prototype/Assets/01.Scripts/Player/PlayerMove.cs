@@ -23,8 +23,8 @@ public class PlayerMove : PlayerAction
         if (!isDash)
         {
             rigid.velocity = new Vector2(horizontal * speed, vertical * speed);
-            animator.SetFloat("Horizontal speed", horizontal);
-            animator.SetFloat("Vertical speed", vertical);
+            //animator.SetFloat("Horizontal speed", horizontal);
+            //animator.SetFloat("Vertical speed", vertical);
         }   
     }
 

@@ -1,15 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
+using UnityEngine;
 
 public class Shotgun : Gun
 {
-    [SerializeField] private float shootDelay = 0.5f;
-    [SerializeField] private float shootAngle = 30;
-    [SerializeField] private int bulletCount = 2;  
-    [SerializeField] private float reloadTime = 0.7f;
     [SerializeField] private int buckshot_BulletCount = 5;
+    [SerializeField] private float shootAngle = 30;
 
     void Start()
     {
@@ -21,11 +16,10 @@ public class Shotgun : Gun
 
     protected override void Shoot()
     {
-        if (bulletCount > 0)
+        if (gunData.bulletCount > 0 && CanShoot())
         {
             //CameraAction.ShakeCam(10, 0.1f); // 카메라 흔들림 == 반동효과
             //GameManager.PlaySFX(GameManager.Instance.audioBox.p_shot_gun, 0.6f); // 사운드
-            //TextureParticleManager.Instance.SpawnShell(transform.position, EventManager.TriggerEvent_Vector3("GETEJECTDIRECTION")); // 셰이더 그래프
 
             float beforeAngle = transform.rotation.eulerAngles.z - (shootAngle / 2);
 
@@ -37,7 +31,7 @@ public class Shotgun : Gun
                     Quaternion.Euler(new Vector3(0, 0, (beforeAngle + (shootAngle / (buckshot_BulletCount - 1)) * i) - 90));
             }
 
-            bulletCount--;
+            gunData.bulletCount--;
             EventManager.TriggerEvent_Action("CONSUMPTION_BULLET"); // 총알 소비 UI 
             StartCoroutine(ShootDelay());
         }
@@ -45,7 +39,7 @@ public class Shotgun : Gun
 
     protected override void Reload()
     {
-        if (bulletCount < 2)
+        if (gunData.bulletCount < gunData.maxBulletCount)
         {
             GameManager.PlaySFX(GameManager.Instance.audioBox.p_shot_gun_reload); // 사운드
 
@@ -56,24 +50,9 @@ public class Shotgun : Gun
                 EventManager.TriggerEvent_Action("LOAD_BULLET"); // 재장전 UI
 
                 AfterImageManager.isOnAfterEffect = false;
-                bulletCount = 2;
+                gunData.bulletCount = gunData.maxBulletCount;
             };
         }
-    }
-
-    protected override IEnumerator ShootDelay()
-    {
-        yield return new WaitForSeconds(shootDelay);
-    }
-
-    protected override int BulletCount()
-    {
-        return bulletCount;
-    }
-
-    protected override float ReloadTime()
-    {
-        return reloadTime;
     }
 
     void OnDestroy()

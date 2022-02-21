@@ -17,11 +17,6 @@ public class PlayerAttack : PlayerAction
         EventManager.AddEvent_Action("RELOAD", Reload);
     }
 
-    protected override void Update()
-    {
-
-    }
-
     void Reload()
     {
         EventManager.TriggerEvent_Action("SHOTGUN_RELOAD");

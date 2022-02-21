@@ -141,12 +141,11 @@ MonoBehaviour:
   aStarfollowEnabled: 1
   attackDist: 30
   chaseDist: 100
-  enemySpeed: 5
+  enemySpeed: 8
   whatIsObstacle:
     serializedVersion: 2
     m_Bits: 64
   isMeleeAtacker: 1
-  bulletPrefab: {fileID: 8007593495147553574, guid: 0740eb4627f856e46be27ebafae31369, type: 3}
   firePoint: {fileID: 7123433604002216790}
 --- !u!114 &8901563951369351418
 MonoBehaviour:

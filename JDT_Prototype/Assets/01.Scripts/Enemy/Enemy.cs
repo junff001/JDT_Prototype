@@ -19,14 +19,14 @@ public abstract class Enemy : MonoBehaviour
     [Header("A*")]
     public bool aStarfollowEnabled = true;
 
-    [Header("스텟")] // 나중에 빼내지 않을까?
-    protected float hp;
-    public float attackDist;
-    public float chaseDist = 0;
+    [Header("몬스터 스탯 및 데이터")] 
+    [SerializeField] private float hp;
+    [SerializeField] private float attackDist;
+    [SerializeField] private float chaseDist = 0;
+    [SerializeField] private float enemySpeed;
+    [SerializeField] private LayerMask whatIsObstacle;
 
-    public float enemySpeed;
     protected int currentWaypoint = 0;
-    public LayerMask whatIsObstacle;
     protected Animator anim;
     protected Rigidbody2D rb;
     public Path path;

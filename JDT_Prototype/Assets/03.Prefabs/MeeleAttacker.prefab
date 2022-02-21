@@ -140,8 +140,8 @@ MonoBehaviour:
   nextWayPointDist: 3
   aStarfollowEnabled: 1
   attackDist: 2
-  chaseDist: 30
-  enemySpeed: 5
+  chaseDist: 100
+  enemySpeed: 10
   whatIsObstacle:
     serializedVersion: 2
     m_Bits: 64
