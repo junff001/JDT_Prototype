@@ -8,41 +8,38 @@ public class Reload_UI : MonoBehaviour
     [SerializeField] private GameObject fill_Bar;
     [SerializeField] private SpriteRenderer bar_BackImage;
     [SerializeField] private SpriteRenderer bar_Image;
-    [HideInInspector] public float fill_Duration = 0;
-
-    public Tween t;
 
     void Start()
     {
-        Image_Enabled(false);
-        //fill_Duration = GameObject.Find("player").GetComponent<PlayerAttack>().reloadTime;
-        //EventManager.AddEvent("FILL_AMOUNT", Fill_Amount);
-        //EventManager.AddEvent("STOP_RELOAD", StopReload);
-        
+        OnReloadImage_UI(false);
+
+        EventManager.AddEvent_Action("ONRELOADIMAGE_UI", OnReloadImage_UI);
+        EventManager.AddEvent_Action("FILLRELOADUIRESET", FillReloadUIReset);
+        EventManager.AddEvent_Function("FILLAMOUNTRELOAD_UI", FillAmountReload_UI);
     }
 
-    void Fill_Amount()
+    Tween FillAmountReload_UI()
     {
-        Image_Enabled(true);
-        t = fill_Bar.transform.DOScaleX(1, fill_Duration).SetEase(Ease.Linear).OnComplete(() =>
-        {
-            Image_Enabled(false);
-            fill_Bar.transform.localScale = new Vector3(0, 1, 1);
-            //EventManager.TriggerEvent("LOAD_BULLET"); // �Ѿ� ���� UI
-        });
+        OnReloadImage_UI(true);
+
+        return fill_Bar.transform.DOScaleX(1, EventManager.TriggerEvent_Float("SHOTGUN_RELOADTIME")).SetEase(Ease.Linear);
     }
 
-    void StopReload()
+    void FillReloadUIReset()
     {
-        t.Complete(false);
-        Image_Enabled(false);
         fill_Bar.transform.localScale = new Vector3(0, 1, 1);
     }
 
-
-    void Image_Enabled(bool isOn)
+    void OnReloadImage_UI(bool isOn)
     {
         bar_BackImage.enabled = isOn;
         bar_Image.enabled = isOn;
+    }
+
+    void OnDestroy()
+    {
+        EventManager.RemoveEvent("ONRELOADIMAGE_UI");
+        EventManager.RemoveEvent("FILLAMOUNTRELOAD_UI");
+        EventManager.RemoveEvent("FILLRELOADUIRESET");
     }
 }
