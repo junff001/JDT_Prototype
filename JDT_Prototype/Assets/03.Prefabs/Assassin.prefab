@@ -142,7 +142,7 @@ MonoBehaviour:
   hp: 0
   attackDist: 5
   chaseDist: 100
-  enemySpeed: 25
+  enemySpeed: 15
   whatIsObstacle:
     serializedVersion: 2
     m_Bits: 64

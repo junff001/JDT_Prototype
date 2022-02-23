@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemy;
+    public List<GameObject> enemies;
+    public List<Transform> spawnTrms;
 
     public float spawnDelay;
 
@@ -19,14 +20,12 @@ public class EnemySpawner : MonoBehaviour
         {
             yield return new WaitForSeconds(spawnDelay);
 
-            int count = Random.Range(1, 6);
-
-            for (int i = 0; i < count; i++)
+            for(int i = 0; i< spawnTrms.Count; i++)
             {
-                float randomX = Random.Range(0, 3.5f);
-                float randomY = Random.Range(0, 3.5f);
+                int randMobIdx = Random.Range(0, enemies.Count);
 
-                Instantiate(enemy, transform.position + new Vector3(randomX, randomY), Quaternion.identity, transform);
+                Instantiate(enemies[randMobIdx], spawnTrms[i].position, Quaternion.identity, transform);
+
             }
         }
     }

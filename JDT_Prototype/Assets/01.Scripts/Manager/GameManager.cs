@@ -7,22 +7,22 @@ using System;
 public class GameManager : MonoBehaviour
 {
     #region 싱글톤
-    private static GameManager _Instance; 
+    private static GameManager _Instance;
     public static GameManager Instance
     {
         get
         {
-            if(_Instance == null)
+            if (_Instance == null)
             {
                 return null;
             }
             return _Instance;
         }
-        
+
     }
     private void Awake()
     {
-        if(_Instance == null)
+        if (_Instance == null)
         {
             _Instance = this;
         }
@@ -34,11 +34,64 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    public enum Weapon
+    {
+        shotgun,
+        Bazooca,
+        DoubleHandgun
+    }
+    public enum Sub
+    {
+        none,
+        bulletDivision,
+        swiftAttack,
+        guidedMissile,
+        exploisionBullet
+    }
+
+    public Sub sub = Sub.none;
+    public Weapon weapon = Weapon.shotgun;
     public Action OnReload;
     public AudioBoxSO audioBox;
     public AudioSource sfxSource;
 
     public GameObject enemyBullet;
+
+    
+
+    public Player player;
+    public GameObject gun;
+    public List<GameObject> weapons;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            PoolManager.ResetPool();
+            //PlayerMove.isDead = false;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
+
+    public void GameStart()
+    {
+        switch (weapon)
+        {
+            case Weapon.shotgun:
+                gun.AddComponent<Shotgun>();
+                break;
+
+            case Weapon.Bazooca:
+                gun.AddComponent<Bazooca>();
+                break;
+
+            case Weapon.DoubleHandgun:
+                gun.AddComponent<DoubleHandgun>();
+                break;
+        }
+
+        player.InitData();
+    }
 
     public static void PlaySound(AudioSource source, AudioClip clip, float volume = 1f)
     {
@@ -50,13 +103,5 @@ public class GameManager : MonoBehaviour
         Instance.sfxSource.PlayOneShot(clip, volume);
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.F5))
-        {
-            PoolManager.ResetPool();
-            //PlayerMove.isDead = false;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-    }
+
 }
