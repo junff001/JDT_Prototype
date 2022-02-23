@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 public class MeshParticleSystem : MonoBehaviour
 {
     private const int MAX_QUAD_AMOUNT = 15000;
-    //¿¡µðÅÍ¿¡¼­ ½ºÇÁ¶óÀÌÆ®¿¡ ÀÖ´Â ÇÈ¼¿ ÁÂÇ¥°ªÀ» Á¶Á¤ÇÏµµ·Ï 
+    //ï¿½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½È¼ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ 
     [Serializable]
     public struct ParticleUVPixels
     {
@@ -15,7 +15,7 @@ public class MeshParticleSystem : MonoBehaviour
         public Vector2Int uv11Pixels;
     }
 
-    //ÅØ½ºÃÄ³»¿¡¼­ ³ë¸Ö¶óÀÌÁî µÈ uv ÁÂÇ¥°ªÀ» °¡Áö°í ÀÖ´Â ¹è¿­
+    //ï¿½Ø½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ö¶ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ uv ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½è¿­
     private struct UVCoords
     {
         public Vector2 uv00;
@@ -35,7 +35,7 @@ public class MeshParticleSystem : MonoBehaviour
 
     private int _quadIndex;
 
-    //¸Þ½Ã Á¤º¸¸¦ °»½ÅÇØ¾ß ÇÏ´ÂÁö¸¦ Ã¼Å©ÇÏ´Â º¯¼ö
+    //ï¿½Þ½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½Ï´ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½
     private bool _updateVertices;
     private bool _updateUV;
     private bool _updateTriangles;
@@ -52,14 +52,14 @@ public class MeshParticleSystem : MonoBehaviour
         _mesh.uv = _uv;
         _mesh.triangles = _triangles;
 
-        //¸Þ½ÃÀÇ °æ°è ¹Ù¿îµå°¡ ÀÛÀ¸¸é Æ¯Á¤ ÁÂÇ¥ÀÌ»ó È­¸é ¹ÛÀ¸·Î ³ª°¡¸é ¸Þ½Ã ÀüÃ¼°¡ ¾È±×·ÁÁö´Â ¹®Á¦°¡ »ý±è.
+        //ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ù¿ï¿½å°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Æ¯ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½Ì»ï¿½ È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½È±×·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
         _mesh.bounds = new Bounds(Vector3.zero, Vector3.one * 10000f);
 
         _meshFilter = GetComponent<MeshFilter>();
         _meshFilter.mesh = _mesh;
 
         _meshRenderer = GetComponent<MeshRenderer>();
-        //Á¤·Ä
+        //ï¿½ï¿½ï¿½ï¿½
         _meshRenderer.sortingLayerName = "Bottom_Effect";
         _meshRenderer.sortingOrder = 0;
 
@@ -69,7 +69,7 @@ public class MeshParticleSystem : MonoBehaviour
         int texWidth = mainTexture.width;
         int texHeight = mainTexture.height;
 
-        //ÀÔ·ÂµÈ ÇÈ¼¿ ÁÂÇ¥¸¦ ³ë¸Ö¶óÀÌÁî µÈ UVÁÂÇ¥·Î º¯°æÇÑ´Ù.
+        //ï¿½Ô·Âµï¿½ ï¿½È¼ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½Ö¶ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ UVï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
         List<UVCoords> uvCoordsList = new List<UVCoords>();
         foreach (ParticleUVPixels pixelUV in particleUVPixelsArray)
         {
@@ -82,7 +82,7 @@ public class MeshParticleSystem : MonoBehaviour
             uvCoordsList.Add(uvCoords);
         }
 
-        _uvCoordsArray = uvCoordsList.ToArray(); //¸®½ºÆ®¸¦ ¹è¿­·Î ÀÛ¼º
+        _uvCoordsArray = uvCoordsList.ToArray(); //ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½Û¼ï¿½
     }
     public int GetRandomBloodIndex()
     {
@@ -91,7 +91,7 @@ public class MeshParticleSystem : MonoBehaviour
 
     public int GetRandomShellIndex()
     {
-        return Random.Range(8, 9); //ÇöÀç´Â 8¹ø¸¸ Åº¾ËÀÌ¶ó
+        return Random.Range(8, 9); //ï¿½ï¿½ï¿½ï¿½ï¿½ 8ï¿½ï¿½ï¿½ï¿½ Åºï¿½ï¿½ï¿½Ì¶ï¿½
     }
 
     private void Update()
@@ -101,7 +101,7 @@ public class MeshParticleSystem : MonoBehaviour
             //Vector3 mousePos = Input.mousePosition;
             //Vector3 pos = Camera.main.ScreenToWorldPoint(mousePos);
             //pos.z = 0;
-            //Å¬·ÎÀú¸¦ À§ÇØ¼­ »ý¼ºÇÏ´Â ·ÎÄÃº¯¼öµé
+            //Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½Ãºï¿½ï¿½ï¿½ï¿½ï¿½
             //Vector3 quadPosition = pos;
             //Vector3 quadSize = new Vector3(0.3f, 0.3f);
             //float rotation = 0f;
@@ -109,7 +109,7 @@ public class MeshParticleSystem : MonoBehaviour
             //int randomIdx = Random.Range(0, _uvCoordsArray.Length);
 
             //int spawnQuadIndex = AddQuad(quadPosition, rotation, quadSize, true, randomIdx);
-            //¿©±â¼­ ÀÌ Äõµå ÀÎµ¦½º¸¦ °¡Áö°í ¾î¶² Äõµå¸¦ ¾÷µ¥ÀÌÆ® ÇÒÁö °áÁ¤ÇÒ ¼ö ÀÖ´Ù.
+            //ï¿½ï¿½ï¿½â¼­ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½î¶² ï¿½ï¿½ï¿½å¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½.
 
 
             //FunctionUpdater.Create(() =>
@@ -145,27 +145,27 @@ public class MeshParticleSystem : MonoBehaviour
 
     public int AddQuad(Vector3 position, float rotation, Vector3 quadSize, bool skewed, int uvIndex)
     {
-        //if (_quadIndex >= MAX_QUAD_AMOUNT) return 0; //ÃÖ´ëÄ¡¿¡ µµ´ÞÇÏ¸é ´õÀÌ»ó »ý¼º ¸øÇÏ°Ô
+        //if (_quadIndex >= MAX_QUAD_AMOUNT) return 0; //ï¿½Ö´ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½Ì»ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½
 
         UpdateQuad(_quadIndex, position, rotation, quadSize, skewed, uvIndex);
 
         int spawnedQuadIndex = _quadIndex;
-        _quadIndex = (_quadIndex + 1) % MAX_QUAD_AMOUNT; //ºÎÁ·ÇÏ¸é °¡Àå ¿¹Àü Äõµå°¡ Áö¿öÁø´Ù.
+        _quadIndex = (_quadIndex + 1) % MAX_QUAD_AMOUNT; //ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½å°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
         return spawnedQuadIndex;
     }
 
     public void UpdateQuad(int quadIndex, Vector3 position, float rotation, Vector3 quadSize, bool skewed, int uvIndex)
     {
         //Relocate vertices
-        //»ç°¢ÇüÇÏ³ª¿¡ 4°³ÀÇ Á¡ÀÌ ÇÊ¿äÇØ¼­ 4°³¾¿ ¹è¼ö·Î
+        //ï¿½ç°¢ï¿½ï¿½ï¿½Ï³ï¿½ï¿½ï¿½ 4ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½Ø¼ï¿½ 4ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
         int vIndex = quadIndex * 4;
         int vIndex0 = vIndex;
         int vIndex1 = vIndex + 1;
         int vIndex2 = vIndex + 2;
         int vIndex3 = vIndex + 3;
 
-        //¿øÁ¡À» ±âÁØÀ¸·Î È¸Àü½ÃÅ´ - È¸ÀüÀº ½Ã°è¹æÇâ È¸ÀüÀÓ 
-        // skewed°¡ trueÀÏ°æ¿ì Å©±â¸¦ Ãà¼Ò ½ÃÅ²´Ù
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½Å´ - È¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ 
+        // skewedï¿½ï¿½ trueï¿½Ï°ï¿½ï¿½ Å©ï¿½â¸¦ ï¿½ï¿½ï¿½ ï¿½ï¿½Å²ï¿½ï¿½
         if (skewed)
         {
             _vertices[vIndex0] = position + Quaternion.Euler(0, 0, rotation) * new Vector3(-quadSize.x, -quadSize.y);
@@ -184,12 +184,12 @@ public class MeshParticleSystem : MonoBehaviour
          *   1 - 2
          *   |   |
          *   0 - 3
-         *   ¼ø¼­·Î »ç°¢ÇüÀ» ¸ÊÇÎ½ÃÅ²´Ù
+         *   ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ç°¢ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î½ï¿½Å²ï¿½ï¿½
          */
 
 
 
-        //uV ¸ÊÇÎ - ³ë¸»¶óÀÌÁîµÈ °ªÀ» ¸ÊÇÎÇÏ¸é µÊ.
+        //uV ï¿½ï¿½ï¿½ï¿½ - ï¿½ë¸»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½.
         UVCoords uv = _uvCoordsArray[uvIndex];
         _uv[vIndex0] = uv.uv00;
         _uv[vIndex1] = new Vector2(uv.uv00.x, uv.uv11.y);
@@ -198,8 +198,8 @@ public class MeshParticleSystem : MonoBehaviour
 
 
         //Create Triangle
-        int tIndex = quadIndex * 6; //»ç°¢Çü ÇÏ³ª´ç 2°³ÀÇ »ï°¢ÇüÀÌ°í »ï°¢ÇüÀº 3°³ÀÇ ²ÀÁöÁ¡ÀÌ¶ó
-        //Æ®¶óÀÌ¾Þ±Û Á¤Á¡¸ÅÄªÀº ½Ã°è¹æÇâÀ¸·Î ÇØ¾ß Á¤¹æ
+        int tIndex = quadIndex * 6; //ï¿½ç°¢ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ 2ï¿½ï¿½ï¿½ï¿½ ï¿½ï°¢ï¿½ï¿½ï¿½Ì°ï¿½ ï¿½ï°¢ï¿½ï¿½ï¿½ï¿½ 3ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½
+        //Æ®ï¿½ï¿½ï¿½Ì¾Þ±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äªï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ ï¿½ï¿½ï¿½ï¿½
         _triangles[tIndex + 0] = vIndex0; // -1, -1
         _triangles[tIndex + 1] = vIndex1; // -1, 1
         _triangles[tIndex + 2] = vIndex2; // 1, 1
@@ -208,15 +208,15 @@ public class MeshParticleSystem : MonoBehaviour
         _triangles[tIndex + 4] = vIndex2;  // 1, 1
         _triangles[tIndex + 5] = vIndex3;  // 1, -1
 
-        //º¯°æÀÌ »ý°åÀ» ¶§ Àç¹Ý¿µÇØÁÖÁö ¾ÊÀ¸¸é º¯°æ¾øÀ½À¸·Î ÀÌÇØÇÏ°í È­¸é¿¡ ¹Ý¿µÇÏÁö ¾Ê´Â´Ù.
-        //ÇÏÁö¸¸ ÀÌ ÀÛ¾÷À» ¸Å ÇÁ·¹ÀÓ¿¡ ¿©·¯°³ÀÇ Äõµå¿¡ ´Ù ÇØÁÖ´Ï±î µ¿ÀÏÇÑ ÀÛ¾÷ÀÌ ÇÁ·¹ÀÓ¿¡ ¿©·¯¹ø ÀÌ·ïÁø´Ù. ±×·¡¼­ boolean º¯¼ö¸¦ ÅëÇØ ÇÑ¹ø¸¸
-        // TextMeshProÀÇ ForceMeshUpdate°¡ ÀÌ ¿ªÇÒÀÌ´Ù.
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ È­ï¿½é¿¡ ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½å¿¡ ï¿½ï¿½ ï¿½ï¿½ï¿½Ö´Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì·ï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½×·ï¿½ï¿½ï¿½ boolean ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¹ï¿½ï¿½ï¿½
+        // TextMeshProï¿½ï¿½ ForceMeshUpdateï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½.
         _updateVertices = true;
         _updateUV = true;
         _updateTriangles = true;
     }
 
-    //È¤½Ã¶óµµ Äõµå¸¦ ¾ø¾Ö¾ßÇÒ ÀÏÀÌ ÀÖ´Ù¸é ÀÌ°É »ç¿ë
+    //È¤ï¿½Ã¶ï¿½ ï¿½ï¿½ï¿½å¸¦ ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½ ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½
     public void DestroyQuad(int quadIndex)
     {
         int vIndex = quadIndex * 4;

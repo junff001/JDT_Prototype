@@ -7,7 +7,23 @@ using System;
 public class EventManager
 {
     private static Hashtable eventHashtable = new Hashtable();
+    private static Dictionary<string, dynamic> eventDictionary = new Dictionary<string, dynamic>( );
 
+    //public static void AddEvent(string eventName, Action addEvent)
+    //{
+    //    dynamic thisEvent;
+
+    //    if (eventDictionary.TryGetValue(eventName, out thisEvent))
+    //    {
+    //        thisEvent += addEvent;
+    //        eventDictionary[eventName] = thisEvent;
+    //    }
+    //    else
+    //    {
+    //        thisEvent += addEvent;
+    //        eventDictionary.Add(eventName, thisEvent);
+    //    }
+    //}
     public static void AddEvent_Action(string eventName, Action addEvent)
     {
         if (eventHashtable.ContainsKey(eventName))
@@ -245,5 +261,19 @@ public class EventManager
         return tween;
     }
 
+    public static T TriggerEvent<T>(string eventName) 
+    {
+        Action action;
 
+        if (eventHashtable.ContainsKey(eventName))
+        {
+            if (eventHashtable[eventName] is Action)
+            {
+                action = (Action)eventHashtable[eventName];
+                action?.Invoke();
+            }
+        }
+
+        return default(T);
+    }
 }

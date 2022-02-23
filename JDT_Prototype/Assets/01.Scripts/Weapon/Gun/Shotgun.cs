@@ -8,16 +8,17 @@ public class Shotgun : Gun
 
     void Start()
     {
-        EventManager.AddEvent_Action("SHOOT", Shoot);
-        EventManager.AddEvent_Action("RELOAD", Reload);
-        EventManager.AddEvent_Function("BULLETCOUNT", BulletCount);
-        EventManager.AddEvent_Function("RELOADTIME", ReloadTime);
+        EventManager.AddEvent_Action("SHOTGUN_SHOOT", Shoot);
+        EventManager.AddEvent_Action("SHOTGUN_RELOAD", Reload);
+        EventManager.AddEvent_Function("SHOTGUN_BULLETCOUNT", BulletCount);
+        EventManager.AddEvent_Function("SHOTGUN_RELOADTIME", ReloadTime);
     }
 
     protected override void Shoot()
     {
         if (gunData.bulletCount > 0 && CanShoot())
         {
+
             //CameraAction.ShakeCam(10, 0.1f); // 카메라 흔들림 == 반동효과
             //GameManager.PlaySFX(GameManager.Instance.audioBox.p_shot_gun, 0.6f); // 사운드
 
@@ -36,8 +37,6 @@ public class Shotgun : Gun
             StartCoroutine(ShootDelay());
         }
     }
-
-
 
     void OnDestroy()
     {
