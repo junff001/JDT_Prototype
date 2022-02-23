@@ -19,13 +19,13 @@ public abstract class Gun : MonoBehaviour
             StopCoroutine(ShootDelay());
             gunData.canShoot = true;
 
-            GameManager.PlaySFX(GameManager.Instance.audioBox.p_shot_gun_reload); // »ç¿îµå
+            GameManager.PlaySFX(GameManager.Instance.audioBox.p_shot_gun_reload); // ï¿½ï¿½ï¿½ï¿½
 
             EventManager.TriggerEvent_Tween("FILLAMOUNTRELOAD_UI").onComplete += () =>
             {
-                EventManager.TriggerEvent_Action("ONRELOADIMAGE_UI", false); // ÀçÀåÀü ¹Ù On/Off
-                EventManager.TriggerEvent_Action("FILLRELOADUIRESET"); // ÀçÀåÀü ¹Ù ¸®¼Â 
-                EventManager.TriggerEvent_Action("LOAD_BULLET"); // ÀçÀåÀü UI
+                EventManager.TriggerEvent_Action("ONRELOADIMAGE_UI", false); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ On/Off
+                EventManager.TriggerEvent_Action("FILLRELOADUIRESET"); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
+                EventManager.TriggerEvent_Action("LOAD_BULLET"); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ UI
 
                 AfterImageManager.isOnAfterEffect = false;
                 gunData.bulletCount = gunData.maxBulletCount;
@@ -43,6 +43,5 @@ public abstract class Gun : MonoBehaviour
     protected virtual int BulletCount() => gunData.bulletCount;
     protected virtual float ReloadTime() => gunData.reloadTime;
     protected virtual bool CanShoot() => gunData.canShoot;
-
 }
     

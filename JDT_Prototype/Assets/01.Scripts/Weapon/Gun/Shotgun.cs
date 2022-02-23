@@ -18,6 +18,7 @@ public class Shotgun : Gun
     {
         if (gunData.bulletCount > 0 && CanShoot())
         {
+
             //CameraAction.ShakeCam(10, 0.1f); // 카메라 흔들림 == 반동효과
             //GameManager.PlaySFX(GameManager.Instance.audioBox.p_shot_gun, 0.6f); // 사운드
 
@@ -36,8 +37,6 @@ public class Shotgun : Gun
             StartCoroutine(ShootDelay());
         }
     }
-
-
 
     void OnDestroy()
     {

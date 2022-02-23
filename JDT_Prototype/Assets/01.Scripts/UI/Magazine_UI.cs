@@ -20,6 +20,7 @@ public class Magazine_UI : MonoBehaviour
 
         EventManager.AddEvent_Action("CONSUMPTIONBULLET_UI", ConsumptionBullet_UI);
         EventManager.AddEvent_Action("RELOADBULLET_UI", ReloadBullet_UI);
+        
     }
 
     void InitBullet_UI()

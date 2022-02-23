@@ -21,16 +21,12 @@ public class PlayerRotate : PlayerAction // �������� �˾Ƽ� 
         mainCam = Camera.main;
         crossHair.SetActive(true);
     }
-    
 
     protected override void Update()
     {
-        //if (PlayerMove.isDead) return;
-
         CrosshairMove();
         Rotate();
     }
-
 
     void Rotate()
     {
