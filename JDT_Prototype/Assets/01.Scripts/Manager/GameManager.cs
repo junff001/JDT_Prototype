@@ -34,34 +34,24 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    public enum Weapon
-    {
-        shotgun,
-        Bazooca,
-        DoubleHandgun
-    }
-    public enum Sub
-    {
-        none,
-        bulletDivision,
-        swiftAttack,
-        guidedMissile,
-        exploisionBullet
-    }
-
-    public Sub sub = Sub.none;
-    public Weapon weapon = Weapon.shotgun;
     public Action OnReload;
     public AudioBoxSO audioBox;
     public AudioSource sfxSource;
 
     public GameObject enemyBullet;
-
     
+    public GameObject player;
+    public Transform gunParentTrm;
+    public Gun selectedGun { get; set; } = null;
 
-    public Player player;
-    public GameObject gun;
-    public List<GameObject> weapons;
+    public Gun shotgun;
+    public Gun bazooka;
+    public Gun doubleHandgun;
+
+    private void Start()
+    {
+        GameStart();
+    }
 
     private void Update()
     {
@@ -75,22 +65,25 @@ public class GameManager : MonoBehaviour
 
     public void GameStart()
     {
-        switch (weapon)
+        Debug.Log(DataManager.weapon);
+
+        
+        switch (DataManager.weapon)
         {
-            case Weapon.shotgun:
-                gun.AddComponent<Shotgun>();
+            case DataManager.Weapon.shotgun:
+                selectedGun = Instantiate(shotgun, gunParentTrm);
                 break;
 
-            case Weapon.Bazooca:
-                gun.AddComponent<Bazooca>();
+            case DataManager.Weapon.Bazooka:
+                selectedGun = Instantiate(bazooka, gunParentTrm);
                 break;
 
-            case Weapon.DoubleHandgun:
-                gun.AddComponent<DoubleHandgun>();
+            case DataManager.Weapon.DoubleHandgun:
+                selectedGun = Instantiate(doubleHandgun, gunParentTrm);
                 break;
         }
-
-        player.InitData();
+        selectedGun.GetComponent<Gun>().InitData();
+        player.GetComponent<PlayerAttack>().InitData();
     }
 
     public static void PlaySound(AudioSource source, AudioClip clip, float volume = 1f)
@@ -102,6 +95,4 @@ public class GameManager : MonoBehaviour
     {
         Instance.sfxSource.PlayOneShot(clip, volume);
     }
-
-
 }

@@ -42,8 +42,8 @@ public class UIManager : MonoBehaviour
     [Header("무기")]
     public GameObject weaponPanel;
     public Button shotgun;
-    public Button cannon;
-    public Button pistol;
+    public Button bazooka;
+    public Button doubleHandgun;
     [Space(10)]
     [Header("서브")]
     public GameObject subPanel;
@@ -54,22 +54,29 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        startBtn.onClick.AddListener(() => SceneManager.LoadScene("InGame"));
+        startBtn.onClick.AddListener(() => SceneManager.LoadScene("JuhyeongScene"));
         exitBtn.onClick.AddListener(() => Application.Quit());
 
         selectWeapon.onClick.AddListener(() => weaponPanel.SetActive(true));
         selectSub.onClick.AddListener(() => subPanel.SetActive(true));
 
-        shotgun.onClick.AddListener(() => GameManager.Instance.weapon = GameManager.Weapon.shotgun);
-        cannon.onClick.AddListener(() => GameManager.Instance.weapon = GameManager.Weapon.Bazooca);
-        pistol.onClick.AddListener(() => GameManager.Instance.weapon = GameManager.Weapon.DoubleHandgun);
+        shotgun.onClick.AddListener(() => DataManager.weapon = DataManager.Weapon.shotgun);
+        bazooka.onClick.AddListener(() => DataManager.weapon = DataManager.Weapon.Bazooka);
+        doubleHandgun.onClick.AddListener(() => DataManager.weapon = DataManager.Weapon.DoubleHandgun);
 
-        bulletDivision.onClick.AddListener(() => GameManager.Instance.sub = GameManager.Sub.bulletDivision);
-        swiftAttack.onClick.AddListener(() => GameManager.Instance.sub = GameManager.Sub.swiftAttack);
-        guidedMissile.onClick.AddListener(() => GameManager.Instance.sub = GameManager.Sub.guidedMissile);
-        exploisionBullet.onClick.AddListener(() => GameManager.Instance.sub = GameManager.Sub.exploisionBullet);
+        bulletDivision.onClick.AddListener(() => DataManager.sub = DataManager.Sub.bulletDivision);
+        swiftAttack.onClick.AddListener(() => DataManager.sub = DataManager.Sub.swiftAttack);
+        guidedMissile.onClick.AddListener(() => DataManager.sub = DataManager.Sub.guidedMissile);
+        exploisionBullet.onClick.AddListener(() => DataManager.sub = DataManager.Sub.exploisionBullet);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Esc();
+        }
+    }
 
     public void Esc()
     {

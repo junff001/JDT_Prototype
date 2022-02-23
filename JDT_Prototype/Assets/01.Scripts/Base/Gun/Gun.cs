@@ -5,6 +5,8 @@ public abstract class Gun : MonoBehaviour
 {
     public GunData gunData;
 
+    public Sub sub;
+
     private void Awake()
     {
         gunData.maxBulletCount = gunData.bulletCount;
@@ -43,5 +45,11 @@ public abstract class Gun : MonoBehaviour
     protected virtual int BulletCount() => gunData.bulletCount;
     protected virtual float ReloadTime() => gunData.reloadTime;
     protected virtual bool CanShoot() => gunData.canShoot;
+    public virtual void InitData()
+    {
+        switch (DataManager.weapon)
+        {
+
+        }
+    }
 }
-    

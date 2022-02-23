@@ -126,8 +126,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9dbdeb01c292514aa1a64afb3c7a95f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootDelay: 0.5
-  shootAngle: 30
-  bulletCount: 2
-  reloadTime: 0.7
+  gunData:
+    shootDelay: 1.5
+    bulletCount: 0
+    reloadTime: 0
+    canShoot: 1
   buckshot_BulletCount: 5
+  shootAngle: 30

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class Bullet : MonoBehaviour
     [SerializeField] private GameObject particle;
     private Collider2D _collider2D;
 
+    Action Move;
+
     private void Awake()
     {
         _collider2D = GetComponent<Collider2D>();
@@ -19,6 +22,9 @@ public class Bullet : MonoBehaviour
     private void OnEnable()                                                                                                                                     
     {
         currentSpeed = speed;
+
+
+
         bullet_real.SetActive(true);
         particle.SetActive(true);
         _collider2D.enabled = true;
@@ -29,8 +35,14 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(transform.up * currentSpeed * Time.deltaTime, Space.World);
+        Move();
     }
+
+    IEnumerator DivideBullet()
+    {
+
+    }
+
 
     IEnumerator BulletDestroy(float time)
     {

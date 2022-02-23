@@ -4,16 +4,9 @@ using UnityEngine;
 
 public class DoubleHandgun : Gun
 {
-    void Start()
-    {
-        EventManager.AddEvent_Action("DOUBLEHANDGUN_SHOOT", Shoot);
-        EventManager.AddEvent_Action("DOUBLEHANDGUN_RELOAD", Reload);
-        EventManager.AddEvent_Function("DOUBLEHANDGUN_BULLETCOUNT", BulletCount);
-        EventManager.AddEvent_Function("DOUBLEHANDGUN_RELOADTIME", ReloadTime);
-    }
-
     protected override void Shoot()
     {
+        Debug.Log("DoubleHandgun");
         if (gunData.bulletCount > 0 && CanShoot())
         {
             //CameraAction.ShakeCam(10, 0.1f); // ī�޶� ��鸲 == �ݵ�ȿ��
@@ -34,5 +27,13 @@ public class DoubleHandgun : Gun
         EventManager.RemoveEvent("DOUBLEHANDGUN_RELOAD");
         EventManager.RemoveEvent("DOUBLEHANDGUN_BULLETCOUNT");
         EventManager.RemoveEvent("DOUBLEHANDGUN_RELOADTIME");
+    }
+
+    public override void InitData()
+    {
+        EventManager.AddEvent_Action("DOUBLEHANDGUN_SHOOT", Shoot);
+        EventManager.AddEvent_Action("DOUBLEHANDGUN_RELOAD", Reload);
+        EventManager.AddEvent_Function("DOUBLEHANDGUN_BULLETCOUNT", BulletCount);
+        EventManager.AddEvent_Function("DOUBLEHANDGUN_RELOADTIME", ReloadTime);
     }
 }

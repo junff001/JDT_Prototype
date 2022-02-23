@@ -6,16 +6,12 @@ public class Shotgun : Gun
     [SerializeField] private int buckshot_BulletCount = 5;
     [SerializeField] private float shootAngle = 30;
 
-    void Start()
-    {
-        EventManager.AddEvent_Action("SHOTGUN_SHOOT", Shoot);
-        EventManager.AddEvent_Action("SHOTGUN_RELOAD", Reload);
-        EventManager.AddEvent_Function("SHOTGUN_BULLETCOUNT", BulletCount);
-        EventManager.AddEvent_Function("SHOTGUN_RELOADTIME", ReloadTime);
-    }
+    
+        
 
     protected override void Shoot()
     {
+        Debug.Log("Shotgun");
         if (gunData.bulletCount > 0 && CanShoot())
         {
 
@@ -44,5 +40,13 @@ public class Shotgun : Gun
         EventManager.RemoveEvent("SHOTGUN_RELOAD");
         EventManager.RemoveEvent("SHOTGUN_BULLETCOUNT");
         EventManager.RemoveEvent("SHOTGUN_RELOADTIME");
+    }
+
+    public override void InitData()
+    {
+        EventManager.AddEvent_Action("SHOTGUN_SHOOT", Shoot);
+        EventManager.AddEvent_Action("SHOTGUN_RELOAD", Reload);
+        EventManager.AddEvent_Function("SHOTGUN_BULLETCOUNT", BulletCount);
+        EventManager.AddEvent_Function("SHOTGUN_RELOADTIME", ReloadTime);
     }
 }
