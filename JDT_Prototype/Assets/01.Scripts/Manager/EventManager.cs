@@ -35,6 +35,17 @@ public class EventManager
             eventHashtable.Add(eventName, addEvent);
         }
     }
+    public static void AddEvent_Action(string eventName, Action<int> addEvent)
+    {
+        if (eventHashtable.ContainsKey(eventName))
+        {
+            eventHashtable[eventName] = addEvent;
+        }
+        else
+        {
+            eventHashtable.Add(eventName, addEvent);
+        }
+    }
     public static void AddEvent_Action(string eventName, Action<bool> addEvent)
     {
         if (eventHashtable.ContainsKey(eventName))
@@ -162,6 +173,19 @@ public class EventManager
             }
         }
     }
+    public static void TriggerEvent_Action(string eventName, int param)
+    {
+        Action<int> action;
+
+        if (eventHashtable.ContainsKey(eventName))
+        {
+            if (eventHashtable[eventName] is Action<int>)
+            {
+                action = (Action<int>)eventHashtable[eventName]; // 언박싱
+                action?.Invoke(param);
+            }
+        }
+    }
     public static void TriggerEvent_Action(string eventName, float moveX, float moveY)
     {
         Action<float, float> action;
@@ -261,19 +285,19 @@ public class EventManager
         return tween;
     }
 
-    public static T TriggerEvent<T>(string eventName) 
-    {
-        Action action;
+    //public static T TriggerEvent<T>(string eventName) 
+    //{
+    //    Action action;
 
-        if (eventHashtable.ContainsKey(eventName))
-        {
-            if (eventHashtable[eventName] is Action)
-            {
-                action = (Action)eventHashtable[eventName];
-                action?.Invoke();
-            }
-        }
+    //    if (eventHashtable.ContainsKey(eventName))
+    //    {
+    //        if (eventHashtable[eventName] is Action)
+    //        {
+    //            action = (Action)eventHashtable[eventName];
+    //            action?.Invoke();
+    //        }
+    //    }
 
-        return default(T);
-    }
+    //    return default(T);
+    //}
 }

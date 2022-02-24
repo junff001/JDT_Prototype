@@ -30,6 +30,7 @@ public class Shotgun : Gun
 
             gunData.bulletCount--;
             EventManager.TriggerEvent_Action("CONSUMPTION_BULLET"); // 총알 소비 UI 
+            EventManager.TriggerEvent_Action("CURRENTBULLETCOUNT_UI", gunData.bulletCount);
             StartCoroutine(ShootDelay());
         }
     }
