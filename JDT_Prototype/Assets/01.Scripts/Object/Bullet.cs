@@ -38,12 +38,6 @@ public class Bullet : MonoBehaviour
         Move();
     }
 
-    IEnumerator DivideBullet()
-    {
-
-    }
-
-
     IEnumerator BulletDestroy(float time)
     {
         yield return new WaitForSeconds(time);

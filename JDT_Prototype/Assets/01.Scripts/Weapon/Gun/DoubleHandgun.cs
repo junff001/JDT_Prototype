@@ -17,6 +17,7 @@ public class DoubleHandgun : Gun
 
             gunData.bulletCount -= 2;
             EventManager.TriggerEvent_Action("CONSUMPTION_BULLET"); // �Ѿ� �Һ� UI 
+            EventManager.TriggerEvent_Action("CURRENTBULLETCOUNT_UI", gunData.bulletCount);
             StartCoroutine(ShootDelay());
         }
     }
