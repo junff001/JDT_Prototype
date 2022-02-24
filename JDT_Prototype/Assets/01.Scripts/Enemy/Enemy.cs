@@ -4,7 +4,7 @@ using UnityEngine;
 using Pathfinding;
 using MonsterLove.StateMachine;
 
-public abstract class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour, IDamageable
 {
     public enum States {Chase, Attack }
 
@@ -213,5 +213,14 @@ public abstract class Enemy : MonoBehaviour
     protected WaitForSeconds Wait(string animName)
     {
         return new WaitForSeconds(Utill.GetAnimLength(anim, "animName"));
+    }
+
+    public void OnDamage(float damage)
+    {
+        hp -= damage;
+        if(hp <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

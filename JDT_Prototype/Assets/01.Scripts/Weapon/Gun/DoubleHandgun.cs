@@ -12,7 +12,7 @@ public class DoubleHandgun : Gun
             //CameraAction.ShakeCam(10, 0.1f); // ī�޶� ��鸲 == �ݵ�ȿ��
             //GameManager.PlaySFX(GameManager.Instance.audioBox.p_shot_gun, 0.6f); // ����
 
-            Bullet bullet = PoolManager.GetItem<Bullet>();
+            ShotgunBullet bullet = PoolManager.GetItem<ShotgunBullet>();
             bullet.transform.position = transform.GetChild(0).position;
 
             gunData.bulletCount -= 2;

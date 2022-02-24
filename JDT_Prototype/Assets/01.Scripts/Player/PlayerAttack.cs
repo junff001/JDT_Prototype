@@ -11,7 +11,7 @@ public class PlayerAttack : PlayerAction
     protected override void Start()
     {
         base.Start();
-        PoolManager.CreatePool<Bullet>(bullet, transform, 100);
+        PoolManager.CreatePool<ShotgunBullet>(bullet, transform, 100);
         
     }
 

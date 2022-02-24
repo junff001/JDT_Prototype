@@ -11,7 +11,7 @@ public class Assassin : Enemy
         
         if (Vector3.Distance(target.transform.position, transform.position) < explosionRadius)
         {
-            target.GetComponent<IDamageable>()?.OnDamage(target.transform.position, this.transform.position);
+            target.GetComponent<IDamageable>()?.OnDamage(5);
         }
         Destroy(this.gameObject);
     }

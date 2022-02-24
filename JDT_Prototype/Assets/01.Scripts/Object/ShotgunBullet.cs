@@ -1,30 +1,24 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class ShotgunBullet : MonoBehaviour
 {
     [SerializeField] private float speed = 20f;
     private float currentSpeed;
-
+    public float damage;
     [SerializeField] private GameObject bullet_real;
     [SerializeField] private GameObject particle;
     private Collider2D _collider2D;
-
-    Action Move;
 
     private void Awake()
     {
         _collider2D = GetComponent<Collider2D>();
     }
 
-    private void OnEnable()                                                                                                                                     
+    private void OnEnable()
     {
         currentSpeed = speed;
-
-
-
         bullet_real.SetActive(true);
         particle.SetActive(true);
         _collider2D.enabled = true;
@@ -35,14 +29,8 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        Move();
+        transform.Translate(transform.up * currentSpeed * Time.deltaTime, Space.World);
     }
-
-    IEnumerator DivideBullet()
-    {
-
-    }
-
 
     IEnumerator BulletDestroy(float time)
     {
@@ -67,14 +55,14 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Wall"))
+        if (collision.CompareTag("Wall"))
         {
             StartCoroutine(BulletDestroy(0f));
             StartCoroutine(ParticleDestroy(0.5f));
         }
         else if (collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<IDamageable>()?.OnDamage(collision.transform.position, Vector2.zero);
+            collision.GetComponent<IDamageable>()?.OnDamage(damage);
             StartCoroutine(BulletDestroy(0f));
             StartCoroutine(ParticleDestroy(0.5f));
         }

@@ -22,7 +22,7 @@ public class Shotgun : Gun
 
             for (int i = 0; i < buckshot_BulletCount; i++)
             {
-                Bullet bullet = PoolManager.GetItem<Bullet>();
+                ShotgunBullet bullet = PoolManager.GetItem<ShotgunBullet>();
                 bullet.transform.position = transform.GetChild(0).position;
                 bullet.transform.rotation =
                     Quaternion.Euler(new Vector3(0, 0, (beforeAngle + (shootAngle / (buckshot_BulletCount - 1)) * i) - 90));
