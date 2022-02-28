@@ -1,11 +1,17 @@
 using System.Collections;
 using UnityEngine;
+using System;
 
 public abstract class Gun : MonoBehaviour
 {
     public GunData gunData;
 
-    private void Awake()
+    internal event Action OnFire;
+    protected event Action OnReload;
+    protected event Func<int> OnBulletCount;
+    protected event Func<float> OnReloadTime;
+
+    void Awake()
     {
         gunData.maxBulletCount = gunData.bulletCount;
         if (DataManager.sub == DataManager.Sub.swiftAttack)
@@ -14,7 +20,15 @@ public abstract class Gun : MonoBehaviour
         } 
     }
 
-    protected virtual void OnFire()
+    void Start()
+    {
+        OnFire = Fire;
+        OnReload = Reload;
+        OnBulletCount = BulletCount;
+        OnReloadTime = ReloadTime;
+    }
+
+    protected virtual void Fire()
     {
         for (int i = 0; i < gunData.attackCount; i++)
         {
@@ -23,7 +37,7 @@ public abstract class Gun : MonoBehaviour
     }
 
     protected abstract void Attack();
-    
+
     protected virtual void Reload()
     {
         if (gunData.bulletCount < gunData.maxBulletCount)
@@ -33,15 +47,15 @@ public abstract class Gun : MonoBehaviour
 
             GameManager.PlaySFX(GameManager.Instance.audioBox.p_shot_gun_reload); // ����
 
-            EventManager.TriggerEvent_Tween("FILLAMOUNTRELOAD_UI").onComplete += () =>
-            {
-                EventManager.TriggerEvent_Action("ONRELOADIMAGE_UI", false); // ������ �� On/Off
-                EventManager.TriggerEvent_Action("FILLRELOADUIRESET"); // ������ �� ���� 
-                EventManager.TriggerEvent_Action("LOAD_BULLET"); // ������ UI
+            //EventManager2.TriggerEvent_Tween("FILLAMOUNTRELOAD_UI").onComplete += () =>
+            //{
+            //    EventManager2.TriggerEvent_Action("ONRELOADIMAGE_UI", false); // ������ �� On/Off
+            //    EventManager2.TriggerEvent_Action("FILLRELOADUIRESET"); // ������ �� ���� 
+            //    EventManager2.TriggerEvent_Action("LOAD_BULLET"); // ������ UI
+            //};
 
-                AfterImageManager.isOnAfterEffect = false;
-                gunData.bulletCount = gunData.maxBulletCount;
-            };
+            AfterImageManager.isOnAfterEffect = false;
+            gunData.bulletCount = gunData.maxBulletCount;
         }
     }
 

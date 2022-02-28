@@ -8,7 +8,7 @@ public class Armor : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            EventManager.TriggerEvent_Action("ADD_ARMOR", this.gameObject);
+            EventManager2.TriggerEvent_Action("ADD_ARMOR", this.gameObject);
             Destroy(this.gameObject);
         }
     }

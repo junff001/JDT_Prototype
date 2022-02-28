@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerMove : PlayerAction
 {
@@ -12,17 +12,21 @@ public class PlayerMove : PlayerAction
     private bool isMove;
     private Vector2 idleDiration;
 
+    event Action<float, float> OnMove;
+    event  Action OnDash;
+
     protected override void Start()
     {
         base.Start();
 
-       
+        OnMove = Move;
+        OnDash = Dash;
     }
 
     public void Init()
     {
-        EventManager.AddEvent_Action("MOVE", Move);
-        EventManager.AddEvent_Action("DASH", Dash);
+        EventManager.AddEvent("MOVE", OnMove);
+        EventManager.AddEvent("DASH", OnDash);
     }
 
     protected override void Update()
@@ -58,7 +62,7 @@ public class PlayerMove : PlayerAction
         {
             isDash = true;
             rigid.velocity = rigid.velocity.normalized * dashDistance;
-            EventManager.TriggerEvent_Action("RELOAD");
+            EventManager2.TriggerEvent_Action("RELOAD");
             AfterImageManager.isOnAfterEffect = true;
 
             StartCoroutine(DashEnd());

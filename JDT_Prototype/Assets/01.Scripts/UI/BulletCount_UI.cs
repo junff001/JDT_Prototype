@@ -10,7 +10,7 @@ public class BulletCount_UI : MonoBehaviour
     void Start()
     {
         text = GetComponent<Text>();
-        EventManager.AddEvent_Action("CURRENTBULLETCOUNT_UI", CurrentBulletCount_UI);
+        EventManager2.AddEvent_Action("CURRENTBULLETCOUNT_UI", CurrentBulletCount_UI);
     }
 
     void CurrentBulletCount_UI(int bulletCount)
@@ -20,6 +20,6 @@ public class BulletCount_UI : MonoBehaviour
 
     void OnDestroy()
     {
-        EventManager.RemoveEvent("CURRENTBULLETCOUNT_UI");
+        EventManager2.RemoveEvent("CURRENTBULLETCOUNT_UI");
     }
 }

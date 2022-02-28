@@ -20,25 +20,25 @@ public class Bazooka : Gun
             bullet.transform.position = transform.GetChild(0).position;
 
             gunData.bulletCount--;
-            EventManager.TriggerEvent_Action("CONSUMPTION_BULLET"); // �Ѿ� �Һ� UI 
-            EventManager.TriggerEvent_Action("CURRENTBULLETCOUNT_UI", gunData.bulletCount);
+            EventManager2.TriggerEvent_Action("CONSUMPTION_BULLET"); // �Ѿ� �Һ� UI 
+            EventManager2.TriggerEvent_Action("CURRENTBULLETCOUNT_UI", gunData.bulletCount);
             StartCoroutine(ShootDelay());
         }
     }
 
     void OnDestroy()
     {
-        EventManager.RemoveEvent("SHOOT");
-        EventManager.RemoveEvent("RELOAD");
-        EventManager.RemoveEvent("BULLETCOUNT");
-        EventManager.RemoveEvent("BAZOOKA_RELOADTIME");
+        EventManager2.RemoveEvent("SHOOT");
+        EventManager2.RemoveEvent("RELOAD");
+        EventManager2.RemoveEvent("BULLETCOUNT");
+        EventManager2.RemoveEvent("BAZOOKA_RELOADTIME");
     }
 
     public override void InitData()
     {
-        EventManager.AddEvent_Action("SHOOT", OnFire);
-        EventManager.AddEvent_Action("RELOAD", Reload);
-        EventManager.AddEvent_Function("BULLETCOUNT", BulletCount);
-        EventManager.AddEvent_Function("RELOADTIME", ReloadTime);
+        EventManager2.AddEvent_Action("SHOOT", Fire);
+        EventManager2.AddEvent_Action("RELOAD", Reload);
+        EventManager2.AddEvent_Function("BULLETCOUNT", BulletCount);
+        EventManager2.AddEvent_Function("RELOADTIME", ReloadTime);
     }
 }

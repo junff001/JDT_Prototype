@@ -18,13 +18,13 @@ public class Magazine_UI : MonoBehaviour
         InitBullet_UI(); 
         OnImageBullet_UI(true);
 
-        EventManager.AddEvent_Action("CONSUMPTIONBULLET_UI", ConsumptionBullet_UI);
-        EventManager.AddEvent_Action("RELOADBULLET_UI", ReloadBullet_UI);
+        EventManager2.AddEvent_Action("CONSUMPTIONBULLET_UI", ConsumptionBullet_UI);
+        EventManager2.AddEvent_Action("RELOADBULLET_UI", ReloadBullet_UI);
     }
 
     void InitBullet_UI()
     {
-        for (int i = 0; i < EventManager.TriggerEvent_Int("BULLETCOUNT"); i++)
+        for (int i = 0; i < EventManager2.TriggerEvent_Int("BULLETCOUNT"); i++)
         {
             magazine.Add(Instantiate(bulletPrefab_UI, bulletGroup_UI));
         }
@@ -37,7 +37,7 @@ public class Magazine_UI : MonoBehaviour
 
     void ConsumptionBullet_UI() // 총알 소비
     {
-        if (EventManager.TriggerEvent_Int("BULLETCOUNT") > 0)
+        if (EventManager2.TriggerEvent_Int("BULLETCOUNT") > 0)
         {
             magazine[currnetMagazine].gameObject.SetActive(false);
             currnetMagazine--;
@@ -58,14 +58,14 @@ public class Magazine_UI : MonoBehaviour
 
     void OnDisable()
     {
-        EventManager.RemoveEvent("CONSUMPTION_BULLET");
-        EventManager.RemoveEvent("LOAD_BULLET");
+        EventManager2.RemoveEvent("CONSUMPTION_BULLET");
+        EventManager2.RemoveEvent("LOAD_BULLET");
     }
 
     void OnDestroy()
     {
-        EventManager.RemoveEvent("CONSUMPTION_BULLET");
-        EventManager.RemoveEvent("LOAD_BULLET");
+        EventManager2.RemoveEvent("CONSUMPTION_BULLET");
+        EventManager2.RemoveEvent("LOAD_BULLET");
     }
 }
 

@@ -5,8 +5,8 @@ public class PlayerAttack : PlayerAction
 {
     private GameObject bullet;
 
-    public Action Reload;
-    public Action Attack;
+    event Action OnReload;
+    event Action OnAttack;
 
     protected override void Start()
     {
@@ -17,15 +17,24 @@ public class PlayerAttack : PlayerAction
     {
         EventManager.RemoveEvent("ATTACK");
         EventManager.RemoveEvent("RELOAD");
+
+        //EventManager2.RemoveEvent("ATTACK");
+        //EventManager2.RemoveEvent("RELOAD");
     }
 
     public void InitData()
-    {
-        Reload = () => EventManager.TriggerEvent_Action("RELOAD");
-        Attack = () => EventManager.TriggerEvent_Action("SHOOT");
+    { 
+        OnReload = () => EventManager.TriggerEvent("RELOAD");
+        OnAttack = () => EventManager.TriggerEvent("SHOOT");
 
-        EventManager.AddEvent_Action("ATTACK", Attack);
-        EventManager.AddEvent_Action("RELOAD", Reload);
+        //Reload = () => EventManager2.TriggerEvent_Action("RELOAD");
+        //Attack = () => EventManager2.TriggerEvent_Action("SHOOT");
+
+        EventManager.AddEvent("ATTACK", OnAttack);
+        EventManager.AddEvent("RELOAD", OnReload);
+
+        //EventManager2.AddEvent_Action("ATTACK", Attack);
+        //EventManager2.AddEvent_Action("RELOAD", Reload);
 
         switch (DataManager.sub)
         {
