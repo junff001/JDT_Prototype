@@ -48,6 +48,14 @@ public class GameManager : MonoBehaviour
     public Gun bazooka;
     public Gun doubleHandgun;
 
+    public enum GameState
+    {
+        CurrnetState,
+        Playing,
+        Pause,
+        GameOver
+    }
+
     private void Start()
     {
         GameStart();
@@ -67,7 +75,6 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log(DataManager.weapon);
 
-        
         switch (DataManager.weapon)
         {
             case DataManager.Weapon.shotgun:

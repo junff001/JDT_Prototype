@@ -1,27 +1,32 @@
 using System.Diagnostics;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Timers;
 
 public class Timer_UI : MonoBehaviour
 {
-    private float time;
-    private Text text;
+    float time;
+    string minute;
+    string second;
+    string emptyZero;
+
+    private Text timer;
 
     void Start()
     {
-        text = GetComponentInChildren<Text>();
+        timer = GetComponentInChildren<Text>();
     }
 
     void Update()
     {
-        
-    }
-
-    void PlayTime()
-    {
         time += Time.deltaTime;
-        text.text = time.ToString();
+        minute = ((int)time / 60).ToString();
+        second = ((int)time % 60).ToString();
+        emptyZero = "0";
+        if (second.Length >= 2)
+        {
+            emptyZero = null;
+        }        
+        timer.text = minute + ":" + emptyZero + second;
     }
 }
