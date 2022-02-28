@@ -18,7 +18,7 @@ public class BulletBase : MonoBehaviour
     private void Awake()
     {
         if(DataManager.weapon == DataManager.Weapon.Bazooka) explodeRadius += 7;
-        else if (DataManager.weapon == DataManager.Weapon.shotgun) destroyCount = 0.2f;
+        else if (DataManager.weapon == DataManager.Weapon.shotgun) destroyCount = 1f;
     }
 
     public virtual void OnEnable()
@@ -26,9 +26,6 @@ public class BulletBase : MonoBehaviour
         currentSpeed = speed;
         StartCoroutine(BulletDestroy(destroyCount));
     }
-
-
-
 
     public virtual void OnAttack(Collider2D collidedObj)
     {

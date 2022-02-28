@@ -54,7 +54,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        startBtn.onClick.AddListener(() => SceneManager.LoadScene("JunseoScene"));
+        startBtn.onClick.AddListener(() => SceneManager.LoadScene("JuhyeongScene"));
         exitBtn.onClick.AddListener(() => Application.Quit());
 
         selectWeapon.onClick.AddListener(() => weaponPanel.SetActive(true));

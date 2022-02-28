@@ -5,11 +5,11 @@ using System;
 
 public class PlayerRotate : PlayerAction // �������� �˾Ƽ� ��������
 {
-    [HideInInspector] public float playerAngle = 0f;
     [HideInInspector] public float gunAngle = 0f;
 
     Vector2 mouse;
     [SerializeField] private GameObject player_Obj;
+
     [SerializeField] private GameObject gunPivot;
     [SerializeField] private GameObject crossHair;
 
@@ -47,14 +47,14 @@ public class PlayerRotate : PlayerAction // �������� �˾Ƽ� 
         if (dir.x > 0)
         {
             sr.flipY = true;
-            playerAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 270;
+            gunAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 180;
         }
         else
         {
             sr.flipY = false;
-            playerAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 180;
+            gunAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
         }
-        gunPivot.transform.rotation = Quaternion.AngleAxis(playerAngle, Vector3.forward);
+        gunPivot.transform.rotation = Quaternion.AngleAxis(gunAngle, Vector3.forward);
     }
 
     void CrosshairMove()

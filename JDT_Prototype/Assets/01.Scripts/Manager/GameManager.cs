@@ -92,6 +92,7 @@ public class GameManager : MonoBehaviour
         selectedGun.GetComponent<Gun>().InitData();
         player.GetComponent<PlayerAttack>().InitData();
         player.GetComponent<PlayerRotate>().Init();
+        player.GetComponent<PlayerMove>().Init();
     }
 
     public static void PlaySound(AudioSource source, AudioClip clip, float volume = 1f)

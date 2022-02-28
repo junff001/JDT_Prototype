@@ -21,8 +21,8 @@ public class PlayerAttack : PlayerAction
 
     public void InitData()
     {
-        Reload = () => EventManager.TriggerEvent_Action("SHOTGUN_RELOAD");
-        Attack = () => EventManager.TriggerEvent_Action("SHOTGUN_SHOOT");
+        Reload = () => EventManager.TriggerEvent_Action("RELOAD");
+        Attack = () => EventManager.TriggerEvent_Action("SHOOT");
 
         EventManager.AddEvent_Action("ATTACK", Attack);
         EventManager.AddEvent_Action("RELOAD", Reload);

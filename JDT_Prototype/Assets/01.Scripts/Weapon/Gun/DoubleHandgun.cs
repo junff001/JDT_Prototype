@@ -27,8 +27,9 @@ public class DoubleHandgun : Gun
             //GameManager.PlaySFX(GameManager.Instance.audioBox.p_shot_gun, 0.6f); // ����
 
             BulletBase bullet = PoolManager.GetItem<BulletBase>();
+            float angle = transform.parent.rotation.eulerAngles.z;
+            bullet.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
             bullet.transform.position = rGun.position;
-
             gunData.bulletCount--;
             EventManager.TriggerEvent_Action("CONSUMPTION_BULLET"); // �Ѿ� �Һ� UI 
             EventManager.TriggerEvent_Action("CURRENTBULLETCOUNT_UI", gunData.bulletCount);
@@ -44,6 +45,9 @@ public class DoubleHandgun : Gun
             //GameManager.PlaySFX(GameManager.Instance.audioBox.p_shot_gun, 0.6f); // ����
 
             BulletBase bullet = PoolManager.GetItem<BulletBase>();
+
+            float angle = transform.parent.rotation.eulerAngles.z;
+            bullet.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
             bullet.transform.position = lGun.position;
 
             gunData.bulletCount--;
@@ -53,19 +57,22 @@ public class DoubleHandgun : Gun
         }
     }
 
+
+
     void OnDestroy()
     {
-        EventManager.RemoveEvent("DOUBLEHANDGUN_SHOOT");
-        EventManager.RemoveEvent("DOUBLEHANDGUN_RELOAD");
-        EventManager.RemoveEvent("DOUBLEHANDGUN_BULLETCOUNT");
-        EventManager.RemoveEvent("DOUBLEHANDGUN_RELOADTIME");
+        EventManager.RemoveEvent("SHOOT");
+        EventManager.RemoveEvent("RELOAD");
+        EventManager.RemoveEvent("BULLETCOUNT");
+        EventManager.RemoveEvent("RELOADTIME");
     }
 
     public override void InitData()
     {
-        EventManager.AddEvent_Action("DOUBLEHANDGUN_SHOOT", OnFire);
-        EventManager.AddEvent_Action("DOUBLEHANDGUN_RELOAD", Reload);
-        EventManager.AddEvent_Function("DOUBLEHANDGUN_BULLETCOUNT", BulletCount);
-        EventManager.AddEvent_Function("DOUBLEHANDGUN_RELOADTIME", ReloadTime);
+        EventManager.AddEvent_Action("SHOOT", OnFire);
+        EventManager.AddEvent_Action("RELOAD", Reload);
+        EventManager.AddEvent_Function("BULLETCOUNT", BulletCount);
+        EventManager.AddEvent_Function("RELOADTIME", ReloadTime);
     }
+
 }

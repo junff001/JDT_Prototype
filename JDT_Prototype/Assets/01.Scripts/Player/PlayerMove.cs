@@ -16,6 +16,11 @@ public class PlayerMove : PlayerAction
     {
         base.Start();
 
+       
+    }
+
+    public void Init()
+    {
         EventManager.AddEvent_Action("MOVE", Move);
         EventManager.AddEvent_Action("DASH", Dash);
     }
