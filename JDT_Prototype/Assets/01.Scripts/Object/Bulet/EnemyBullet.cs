@@ -43,7 +43,7 @@ public class EnemyBullet : MonoBehaviour
         else if (collision.CompareTag("Player"))
         {
             StartCoroutine(BulletDestroy(0f));
-            collision.GetComponent<IDamageable>()?.OnDamage(collision.transform.position, Vector2.zero);
+            collision.GetComponent<IDamageable>()?.OnDamage(1);
         }
     }
 }

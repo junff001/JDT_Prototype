@@ -6,4 +6,5 @@ public class GunData
     public int maxBulletCount { get; set; }
     public float reloadTime;
     public bool canShoot = true;
+    public int attackCount = 1;
 }

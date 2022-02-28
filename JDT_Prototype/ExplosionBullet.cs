@@ -2,13 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplosionBullet : MonoBehaviour
+public class ExplosionBullet : BulletBase
 {
-    [SerializeField] private float speed = 20f;
-    private float currentSpeed;
-    public float damage;
-    [SerializeField] private GameObject bullet;
-    private Collider2D _collider2D;
 
     public ParticleSystem explosionEfx;
 
@@ -40,17 +35,7 @@ public class ExplosionBullet : MonoBehaviour
         
     }
 
-    public void Attack()
-    {
-        Instantiate(explosionEfx, transform.position, Quaternion.identity);
-
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, 5f);
-
-        foreach(Collider2D enemy in enemies)
-        {
-            enemy.GetComponent<IDamageable>()?.OnDamage(damage);
-        }
-    }
+    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

@@ -5,19 +5,22 @@ using System;
 
 public class PlayerRotate : PlayerAction // �������� �˾Ƽ� ��������
 {
-    [HideInInspector]public float playerAngle = 0f;
-    [HideInInspector]public float gunAngle = 0f;
+    [HideInInspector] public float playerAngle = 0f;
+    [HideInInspector] public float gunAngle = 0f;
 
     Vector2 mouse;
     [SerializeField] private GameObject player_Obj;
-    [SerializeField] private GameObject gun;
+    [SerializeField] private GameObject gunPivot;
     [SerializeField] private GameObject crossHair;
+
+    SpriteRenderer sr;
 
     private Camera mainCam;
 
     protected override void Start()
     {
         base.Start();
+        sr = gunPivot.GetComponentInChildren<SpriteRenderer>();
         mainCam = Camera.main;
         crossHair.SetActive(true);
     }
@@ -31,14 +34,19 @@ public class PlayerRotate : PlayerAction // �������� �˾Ƽ� 
     void Rotate()
     {
         Vector3 dir = crossHair.transform.position - player_Obj.transform.position;
-
-        playerAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 180f;
-        // �̰� ������� ��������Ʈ �ٲٸ� ���� �������?
-
-        gunAngle = Mathf.Atan2(mouse.y - gun.transform.position.y, mouse.x - gun.transform.position.x) * Mathf.Rad2Deg;
-        gun.transform.rotation = Quaternion.AngleAxis(gunAngle, Vector3.forward);
+        if (dir.x > 0)
+        {
+            sr.flipY = true;
+            playerAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 270;
+        }
+        else
+        {
+            sr.flipY = false;
+            playerAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 180;
+        }
+        gunPivot.transform.rotation = Quaternion.AngleAxis(playerAngle, Vector3.forward);
     }
-    
+
     void CrosshairMove()
     {
         mouse = mainCam.ScreenToWorldPoint(Input.mousePosition);

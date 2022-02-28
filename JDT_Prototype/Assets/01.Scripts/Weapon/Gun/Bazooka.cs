@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class Bazooka : Gun
 {
-    protected override void Shoot()
+    protected override void Attack()
     {
-        Debug.Log("Bazooka");
-
         if (gunData.bulletCount > 0 && CanShoot())
         {
             //CameraAction.ShakeCam(10, 0.1f); // ī�޶� ��鸲 == �ݵ�ȿ��
             //GameManager.PlaySFX(GameManager.Instance.audioBox.p_shot_gun, 0.6f); // ����
 
-            ShotgunBullet bullet = PoolManager.GetItem<ShotgunBullet>();
+            BulletBase bullet = PoolManager.GetItem<BulletBase>();
             bullet.transform.position = transform.GetChild(0).position;
 
             gunData.bulletCount--;
@@ -33,9 +31,11 @@ public class Bazooka : Gun
 
     public override void InitData()
     {
-        EventManager.AddEvent_Action("BAZOOKA_SHOOT", Shoot);
+        EventManager.AddEvent_Action("BAZOOKA_SHOOT", OnFire);
         EventManager.AddEvent_Action("BAZOOKA_RELOAD", Reload);
         EventManager.AddEvent_Function("BAZOOKA_BULLETCOUNT", BulletCount);
         EventManager.AddEvent_Function("BAZOOKA_RELOADTIME", ReloadTime);
     }
+
+
 }
