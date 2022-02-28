@@ -22,7 +22,7 @@ public class Reload_UI : MonoBehaviour
     {
         OnReloadImage_UI(true);
 
-        return fill_Bar.transform.DOScaleX(1, EventManager.TriggerEvent_Float("SHOTGUN_RELOADTIME")).SetEase(Ease.Linear);
+        return fill_Bar.transform.DOScaleX(1, EventManager.TriggerEvent_Float("RELOADTIME")).SetEase(Ease.Linear);
     }
 
     void FillReloadUIReset()

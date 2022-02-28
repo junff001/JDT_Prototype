@@ -31,11 +31,13 @@ public class Bazooka : Gun
         EventManager.RemoveEvent("SHOOT");
         EventManager.RemoveEvent("RELOAD");
         EventManager.RemoveEvent("BULLETCOUNT");
-        EventManager.RemoveEvent("BAZOOKA_RELOADTIME");
+        EventManager.RemoveEvent("RELOADTIME");
     }
 
     public override void InitData()
     {
+        base.InitData();
+
         EventManager.AddEvent_Action("SHOOT", OnFire);
         EventManager.AddEvent_Action("RELOAD", Reload);
         EventManager.AddEvent_Function("BULLETCOUNT", BulletCount);

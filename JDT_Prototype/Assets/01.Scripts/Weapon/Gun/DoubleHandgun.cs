@@ -69,6 +69,8 @@ public class DoubleHandgun : Gun
 
     public override void InitData()
     {
+        base.InitData();
+
         EventManager.AddEvent_Action("SHOOT", OnFire);
         EventManager.AddEvent_Action("RELOAD", Reload);
         EventManager.AddEvent_Function("BULLETCOUNT", BulletCount);

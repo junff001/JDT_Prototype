@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     
     public GameObject player;
     public Transform gunParentTrm;
-    public Gun selectedGun { get; set; } = null;
+    private Gun selectedGun;
 
     public Gun shotgun;
     public Gun bazooka;
@@ -66,7 +66,6 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F5))
         {
             PoolManager.ResetPool();
-            //PlayerMove.isDead = false;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }

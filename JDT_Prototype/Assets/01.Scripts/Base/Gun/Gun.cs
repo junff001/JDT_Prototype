@@ -11,7 +11,8 @@ public abstract class Gun : MonoBehaviour
         if (DataManager.sub == DataManager.Sub.swiftAttack)
         {
             gunData.attackCount = 2;
-        } 
+        }
+
     }
 
     protected virtual void OnFire()
@@ -56,5 +57,8 @@ public abstract class Gun : MonoBehaviour
     protected virtual float ReloadTime() => gunData.reloadTime;
     protected virtual bool CanShoot() => gunData.canShoot;
 
-    public abstract void InitData();
+    public virtual void InitData()
+    {
+        Debug.Log("무기 관련 함수 초기화");
+    }
 }
