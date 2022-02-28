@@ -9,6 +9,8 @@ public class PlayerMove : PlayerAction
     [SerializeField] private float dashPlayTime;
 
     private bool isDash;
+    private bool isMove;
+    private Vector2 idleDiration;
 
     protected override void Start()
     {
@@ -18,13 +20,30 @@ public class PlayerMove : PlayerAction
         EventManager.AddEvent_Action("DASH", Dash);
     }
 
+    protected override void Update()
+    {
+        base.Update();
+
+        isMove = rigid.velocity.sqrMagnitude != 0;
+        animator.SetBool("IsMove", isMove); // Idle, Movement 변환
+        if (isMove)
+        {
+            animator.SetFloat("Horizontal speed", rigid.velocity.x);
+            animator.SetFloat("Vertical speed", rigid.velocity.y);
+            idleDiration = new Vector2(rigid.velocity.x, rigid.velocity.y);
+        }
+        else
+        {
+            animator.SetFloat("Horizontal speed", idleDiration.x);
+            animator.SetFloat("Vertical speed", idleDiration.y); 
+        }
+    }
+
     void Move(float horizontal, float vertical)
     {
         if (!isDash)
         {
             rigid.velocity = new Vector2(horizontal * speed, vertical * speed);
-            //animator.SetFloat("Horizontal speed", horizontal);
-            //animator.SetFloat("Vertical speed", vertical);
         }   
     }
 
