@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/00.Scenes/StartScene.unity
     guid: 3a5873ed6975af44cb29167ad7885532
+  - enabled: 1
+    path: Assets/00.Scenes/JunseoScene.unity
+    guid: c0ee7c34fb154854ab59565151df9226
   m_configObjects: {}

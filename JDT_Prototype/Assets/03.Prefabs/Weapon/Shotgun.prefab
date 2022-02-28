@@ -131,6 +131,6 @@ MonoBehaviour:
     bulletCount: 0
     reloadTime: 0
     canShoot: 1
-  sub: {fileID: 0}
+    attackCount: 1
   buckshot_BulletCount: 5
   shootAngle: 30

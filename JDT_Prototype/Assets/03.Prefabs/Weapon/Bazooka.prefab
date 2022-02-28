@@ -101,7 +101,7 @@ MonoBehaviour:
     bulletCount: 1
     reloadTime: 5
     canShoot: 1
-  sub: {fileID: 0}
+    attackCount: 1
 --- !u!1 &3988489976130005655
 GameObject:
   m_ObjectHideFlags: 0

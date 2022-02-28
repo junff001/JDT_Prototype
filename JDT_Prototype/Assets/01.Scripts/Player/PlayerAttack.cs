@@ -27,33 +27,29 @@ public class PlayerAttack : PlayerAction
         EventManager.AddEvent_Action("ATTACK", Attack);
         EventManager.AddEvent_Action("RELOAD", Reload);
 
-        bullet = Resources.Load()
-
-        PoolManager.CreatePool<BulletBase>(bullet, transform, 100);
-
-        /*
         switch (DataManager.sub)
         {
             case DataManager.Sub.none:
-                PoolManager.CreatePool<NormalBullet>(bullet, transform, 100);
+                bullet = Resources.Load("NormalBullet") as GameObject;
                 break;
 
             case DataManager.Sub.bulletDivision:
-                PoolManager.CreatePool<DivisionBullet>(bullet, transform, 100);
+                bullet = Resources.Load("DivisionBullet") as GameObject;
                 break;
 
             case DataManager.Sub.exploisionBullet:
-                PoolManager.CreatePool<ExplosionBullet>(bullet, transform, 100);
+                bullet = Resources.Load("ExplosionBullet") as GameObject;
                 break;
 
             case DataManager.Sub.guidedMissile:
-                PoolManager.CreatePool<GuidedBullet>(bullet, transform, 100);
+                bullet = Resources.Load("GuidedBullet") as GameObject;
                 break;
 
             case DataManager.Sub.swiftAttack:
-                PoolManager.CreatePool<SwiftBullet>(bullet, transform, 100);
+                bullet = Resources.Load("SwiftBullet") as GameObject;
                 break;
         }
-        */
+
+        PoolManager.CreatePool<BulletBase>(bullet, transform, 100);
     }
 }

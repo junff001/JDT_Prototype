@@ -14,21 +14,31 @@ public class PlayerRotate : PlayerAction // �������� �˾Ƽ� 
     [SerializeField] private GameObject crossHair;
 
     SpriteRenderer sr;
-
     private Camera mainCam;
+
+    bool isInitCompleted = false;
 
     protected override void Start()
     {
         base.Start();
-        sr = gunPivot.GetComponentInChildren<SpriteRenderer>();
-        mainCam = Camera.main;
-        crossHair.SetActive(true);
+        
     }
 
     protected override void Update()
     {
-        CrosshairMove();
-        Rotate();
+        if (isInitCompleted)
+        {
+            CrosshairMove();
+            Rotate();
+        }
+    }
+
+    public void Init()
+    {
+        sr = gunPivot.GetComponentInChildren<SpriteRenderer>();
+        mainCam = Camera.main;
+        crossHair.SetActive(true);
+        isInitCompleted = true;
     }
 
     void Rotate()
