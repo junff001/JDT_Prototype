@@ -13,16 +13,16 @@ public class Reload_UI : MonoBehaviour
     {
         OnReloadImage_UI(false);
 
-        EventManager.AddEvent_Action("ONRELOADIMAGE_UI", OnReloadImage_UI);
-        EventManager.AddEvent_Action("FILLRELOADUIRESET", FillReloadUIReset);
-        EventManager.AddEvent_Function("FILLAMOUNTRELOAD_UI", FillAmountReload_UI);
+        EventManager2.AddEvent_Action("ONRELOADIMAGE_UI", OnReloadImage_UI);
+        EventManager2.AddEvent_Action("FILLRELOADUIRESET", FillReloadUIReset);
+        EventManager2.AddEvent_Function("FILLAMOUNTRELOAD_UI", FillAmountReload_UI);
     }
 
     Tween FillAmountReload_UI()
     {
         OnReloadImage_UI(true);
 
-        return fill_Bar.transform.DOScaleX(1, EventManager.TriggerEvent_Float("RELOADTIME")).SetEase(Ease.Linear);
+        return fill_Bar.transform.DOScaleX(1, EventManager2.TriggerEvent_Float("SHOTGUN_RELOADTIME")).SetEase(Ease.Linear);
     }
 
     void FillReloadUIReset()
@@ -38,8 +38,8 @@ public class Reload_UI : MonoBehaviour
 
     void OnDestroy()
     {
-        EventManager.RemoveEvent("ONRELOADIMAGE_UI");
-        EventManager.RemoveEvent("FILLAMOUNTRELOAD_UI");
-        EventManager.RemoveEvent("FILLRELOADUIRESET");
+        EventManager2.RemoveEvent("ONRELOADIMAGE_UI");
+        EventManager2.RemoveEvent("FILLAMOUNTRELOAD_UI");
+        EventManager2.RemoveEvent("FILLRELOADUIRESET");
     }
 }

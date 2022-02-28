@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Player : Character
 {
@@ -11,6 +12,10 @@ public class Player : Character
     [SerializeField] private int hp;
     [SerializeField] private int maxHP;
 
+    event Action<int> OnTakeDamage;
+    event Action<int> OnTakeHeal;
+    event Func<int> OnMaxHP;
+
     protected override void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -20,9 +25,17 @@ public class Player : Character
 
     protected override void Start()
     {
-        EventManager.AddEvent_Action("TAKEDAMAGE", TakeDamage);
-        EventManager.AddEvent_Action("TAKEHEAL", TakeHeal);
-        EventManager.AddEvent_Function("MAXHP", MaxHP);
+        OnTakeDamage = TakeDamage;
+        OnTakeHeal = TakeHeal;
+        OnMaxHP = MaxHP;
+
+        EventManager.AddEvent("TAKEDAMAGE", OnTakeDamage);
+        EventManager.AddEvent("TAKEHEAL", OnTakeHeal);
+        EventManager.AddEvent("MAXHP", OnMaxHP);
+
+        //EventManager2.AddEvent_Action("TAKEDAMAGE", TakeDamage);
+        //EventManager2.AddEvent_Action("TAKEHEAL", TakeHeal);
+        //EventManager2.AddEvent_Function("MAXHP", MaxHP);
     }
 
     protected override void Update()
@@ -39,14 +52,14 @@ public class Player : Character
     {
         hp -= damage;
         ClampHP();
-        EventManager.TriggerEvent_Action("HPPERSIMMON_UI", damage);
+        EventManager2.TriggerEvent_Action("HPPERSIMMON_UI", damage);
     }
 
     void TakeHeal(int heal)
     {
         hp += heal;
         ClampHP();
-        EventManager.TriggerEvent_Action("HPINCREASE_UI", heal);
+        EventManager2.TriggerEvent_Action("HPINCREASE_UI", heal);
     }
 
     void ClampHP()
@@ -59,5 +72,9 @@ public class Player : Character
         EventManager.RemoveEvent("TAKEDAMAGE");
         EventManager.RemoveEvent("TAKEHEAL");
         EventManager.RemoveEvent("MAXHP");
+
+        //EventManager2.RemoveEvent("TAKEDAMAGE");
+        //EventManager2.RemoveEvent("TAKEHEAL");
+        //EventManager2.RemoveEvent("MAXHP");
     }
 }

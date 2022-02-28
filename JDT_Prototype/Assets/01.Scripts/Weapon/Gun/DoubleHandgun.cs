@@ -31,8 +31,8 @@ public class DoubleHandgun : Gun
             bullet.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
             bullet.transform.position = rGun.position;
             gunData.bulletCount--;
-            EventManager.TriggerEvent_Action("CONSUMPTION_BULLET"); // �Ѿ� �Һ� UI 
-            EventManager.TriggerEvent_Action("CURRENTBULLETCOUNT_UI", gunData.bulletCount);
+            EventManager2.TriggerEvent_Action("CONSUMPTION_BULLET"); // �Ѿ� �Һ� UI 
+            EventManager2.TriggerEvent_Action("CURRENTBULLETCOUNT_UI", gunData.bulletCount);
             StartCoroutine(ShootDelay());
         }
     }
@@ -51,8 +51,8 @@ public class DoubleHandgun : Gun
             bullet.transform.position = lGun.position;
 
             gunData.bulletCount--;
-            EventManager.TriggerEvent_Action("CONSUMPTION_BULLET"); // �Ѿ� �Һ� UI 
-            EventManager.TriggerEvent_Action("CURRENTBULLETCOUNT_UI", gunData.bulletCount);
+            EventManager2.TriggerEvent_Action("CONSUMPTION_BULLET"); // �Ѿ� �Һ� UI 
+            EventManager2.TriggerEvent_Action("CURRENTBULLETCOUNT_UI", gunData.bulletCount);
             StartCoroutine(ShootDelay());
         }
     }
@@ -61,20 +61,18 @@ public class DoubleHandgun : Gun
 
     void OnDestroy()
     {
-        EventManager.RemoveEvent("SHOOT");
-        EventManager.RemoveEvent("RELOAD");
-        EventManager.RemoveEvent("BULLETCOUNT");
-        EventManager.RemoveEvent("RELOADTIME");
+        EventManager2.RemoveEvent("SHOOT");
+        EventManager2.RemoveEvent("RELOAD");
+        EventManager2.RemoveEvent("BULLETCOUNT");
+        EventManager2.RemoveEvent("RELOADTIME");
     }
 
     public override void InitData()
     {
-        base.InitData();
-
-        EventManager.AddEvent_Action("SHOOT", OnFire);
-        EventManager.AddEvent_Action("RELOAD", Reload);
-        EventManager.AddEvent_Function("BULLETCOUNT", BulletCount);
-        EventManager.AddEvent_Function("RELOADTIME", ReloadTime);
+        EventManager2.AddEvent_Action("SHOOT", Fire);
+        EventManager2.AddEvent_Action("RELOAD", Reload);
+        EventManager2.AddEvent_Function("BULLETCOUNT", BulletCount);
+        EventManager2.AddEvent_Function("RELOADTIME", ReloadTime);
     }
 
 }
