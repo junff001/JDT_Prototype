@@ -5,36 +5,14 @@ public class PlayerAttack : PlayerAction
 {
     private GameObject bullet;
 
-    event Action OnReload;
-    event Action OnAttack;
 
     protected override void Start()
     {
         base.Start();
     }
 
-    void OnDestroy()
-    {
-        EventManager.RemoveEvent("ATTACK");
-        EventManager.RemoveEvent("RELOAD");
-
-        //EventManager2.RemoveEvent("ATTACK");
-        //EventManager2.RemoveEvent("RELOAD");
-    }
-
     public void InitData()
     { 
-        OnReload = () => EventManager.TriggerEvent("RELOAD");
-        OnAttack = () => EventManager.TriggerEvent("SHOOT");
-
-        //Reload = () => EventManager2.TriggerEvent_Action("RELOAD");
-        //Attack = () => EventManager2.TriggerEvent_Action("SHOOT");
-
-        EventManager.AddEvent("ATTACK", OnAttack);
-        EventManager.AddEvent("RELOAD", OnReload);
-
-        //EventManager2.AddEvent_Action("ATTACK", Attack);
-        //EventManager2.AddEvent_Action("RELOAD", Reload);
 
         switch (DataManager.sub)
         {
@@ -43,6 +21,9 @@ public class PlayerAttack : PlayerAction
                 break;
 
             case DataManager.Sub.bulletDivision:
+                bullet = Resources.Load("NormalBullet") as GameObject;
+                PoolManager.CreatePool<NormalBullet>(bullet, GameManager.Instance.transform, 50);
+
                 bullet = Resources.Load("DivisionBullet") as GameObject;
                 break;
 
@@ -59,6 +40,6 @@ public class PlayerAttack : PlayerAction
                 break;
         }
 
-        PoolManager.CreatePool<BulletBase>(bullet, transform, 100);
+        PoolManager.CreatePool<BulletBase>(bullet, GameManager.Instance.transform, 100);
     }
 }

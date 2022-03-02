@@ -66,13 +66,13 @@ public class DoubleHandgun : Gun
         EventManager2.RemoveEvent("BULLETCOUNT");
         EventManager2.RemoveEvent("RELOADTIME");
     }
-
     public override void InitData()
     {
+        base.InitData();
+
         EventManager2.AddEvent_Action("SHOOT", Fire);
         EventManager2.AddEvent_Action("RELOAD", Reload);
         EventManager2.AddEvent_Function("BULLETCOUNT", BulletCount);
         EventManager2.AddEvent_Function("RELOADTIME", ReloadTime);
     }
-
 }

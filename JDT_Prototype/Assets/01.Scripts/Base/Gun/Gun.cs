@@ -6,11 +6,6 @@ public abstract class Gun : MonoBehaviour
 {
     public GunData gunData;
 
-    internal event Action OnFire;
-    protected event Action OnReload;
-    protected event Func<int> OnBulletCount;
-    protected event Func<float> OnReloadTime;
-
     void Awake()
     {
         gunData.maxBulletCount = gunData.bulletCount;
@@ -18,19 +13,11 @@ public abstract class Gun : MonoBehaviour
         {
             gunData.attackCount = 2;
         }
-
-    }
-
-    void Start()
-    {
-        OnFire = Fire;
-        OnReload = Reload;
-        OnBulletCount = BulletCount;
-        OnReloadTime = ReloadTime;
     }
 
     protected virtual void Fire()
     {
+        Debug.Log("공격");
         for (int i = 0; i < gunData.attackCount; i++)
         {
             Attack();
@@ -39,8 +26,9 @@ public abstract class Gun : MonoBehaviour
 
     protected abstract void Attack();
 
-    protected virtual void Reload()
+    public virtual void Reload()
     {
+        Debug.Log("재장전");
         if (gunData.bulletCount < gunData.maxBulletCount)
         {
             StopCoroutine(ShootDelay());

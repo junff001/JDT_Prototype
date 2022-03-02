@@ -34,7 +34,6 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    public Action OnReload;
     public AudioBoxSO audioBox;
     public AudioSource sfxSource;
 
@@ -88,9 +87,11 @@ public class GameManager : MonoBehaviour
                 selectedGun = Instantiate(doubleHandgun, gunParentTrm);
                 break;
         }
+
+        player.GetComponent<PlayerRotate>().Init();
+
         selectedGun.GetComponent<Gun>().InitData();
         player.GetComponent<PlayerAttack>().InitData();
-        player.GetComponent<PlayerRotate>().Init();
         player.GetComponent<PlayerMove>().Init();
     }
 

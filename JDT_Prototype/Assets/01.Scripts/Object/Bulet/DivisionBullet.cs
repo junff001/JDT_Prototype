@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class DivisionBullet : BulletBase
 {
-    public bool canDivide;
 
     public override void OnEnable()
     {
@@ -14,28 +13,18 @@ public class DivisionBullet : BulletBase
 
     IEnumerator DivideShoot()
     {
-        if (canDivide)
-        {
-            yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.5f);
 
-            BulletBase bullet1 = PoolManager.GetItem<BulletBase>();
-            BulletBase bullet2 = PoolManager.GetItem<BulletBase>();
+        NormalBullet bullet1 = PoolManager.GetItem<NormalBullet>();
+        NormalBullet bullet2 = PoolManager.GetItem<NormalBullet>();
 
-            bullet1.transform.rotation = Quaternion.AngleAxis(transform.eulerAngles.z + 15, Vector3.forward);
-            bullet2.transform.rotation = Quaternion.AngleAxis(transform.eulerAngles.z - 15, Vector3.forward);
+        bullet1.transform.position = this.transform.position;
+        bullet2.transform.position = this.transform.position;
 
-            bullet1.GetComponent<DivisionBullet>().canDivide = false;
-            bullet2.GetComponent<DivisionBullet>().canDivide = false;
+        bullet1.transform.rotation = Quaternion.AngleAxis(transform.eulerAngles.z + 15, Vector3.forward);
+        bullet2.transform.rotation = Quaternion.AngleAxis(transform.eulerAngles.z - 15, Vector3.forward);
 
-            currentSpeed = 0;
-            gameObject.SetActive(false);
-        }
-        yield return null;
-        
-    }
-
-    public void OnDisable()
-    {
-        canDivide = true;
+        currentSpeed = 0;
+        gameObject.SetActive(false);
     }
 }

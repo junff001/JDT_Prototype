@@ -32,18 +32,19 @@ public class Shotgun : Gun
 
     void OnDestroy()
     {
-        EventManager.RemoveEvent("SHOTGUN_SHOOT");
-        EventManager.RemoveEvent("SHOTGUN_RELOAD");
-        EventManager.RemoveEvent("SHOTGUN_BULLETCOUNT");
-        EventManager.RemoveEvent("SHOTGUN_RELOADTIME");
+        EventManager2.RemoveEvent("SHOOT");
+        EventManager2.RemoveEvent("RELOAD");
+        EventManager2.RemoveEvent("BULLETCOUNT");
+        EventManager2.RemoveEvent("RELOADTIME");
     }
 
     public override void InitData()
     {
-        EventManager2.AddEvent_Action("SHOTGUN_SHOOT", Fire);
-        EventManager2.AddEvent_Action("SHOTGUN_RELOAD", Reload);
-        EventManager2.AddEvent_Function("SHOTGUN_BULLETCOUNT", BulletCount);
-        EventManager2.AddEvent_Function("SHOTGUN_RELOADTIME", ReloadTime);
-    }
+        base.InitData();
 
+        EventManager2.AddEvent_Action("SHOOT", Fire);
+        EventManager2.AddEvent_Action("RELOAD", Reload);
+        EventManager2.AddEvent_Function("BULLETCOUNT", BulletCount);
+        EventManager2.AddEvent_Function("RELOADTIME", ReloadTime);
+    }
 }

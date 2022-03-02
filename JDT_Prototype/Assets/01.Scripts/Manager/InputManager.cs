@@ -16,12 +16,12 @@ public class InputManager : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0)) // 공격 (좌클릭)
         {
-            EventManager.TriggerEvent("ATTACK");
+            EventManager2.TriggerEvent_Action("SHOOT");
             //EventManager2.TriggerEvent_Action("ATTACK");
         }
         if (Input.GetButtonDown("Reload")) // 재장전 (R 키)
         {
-            EventManager.TriggerEvent("RELOAD");
+            EventManager2.TriggerEvent_Action("RELOAD");
             //EventManager2.TriggerEvent_Action("RELOAD");
         }
     }

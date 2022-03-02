@@ -19,12 +19,14 @@ public class PlayerMove : PlayerAction
     {
         base.Start();
 
-        OnMove = Move;
-        OnDash = Dash;
+        
     }
 
     public void Init()
     {
+        OnMove = Move;
+        OnDash = Dash;
+
         EventManager.AddEvent("MOVE", OnMove);
         EventManager.AddEvent("DASH", OnDash);
     }
